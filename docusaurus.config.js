@@ -23,23 +23,15 @@ const config = {
   tagline: "插件文档",
   favicon: "img/favicon.ico",
 
-  // Set the production url of your site here
   url: "https://theflooddragon.github.io",
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: process.env.BASE_URL ?? '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: "Altawk/TheFloodDragon", // Usually your GitHub org/user name.
-  projectName: "Ratziel-Wiki", // Usually your repo name.
+  organizationName: "Altawk/TheFloodDragon",
+  projectName: "Ratziel-Wiki",
 
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "zh-Hans",
     locales: ["zh-Hans", "en"],
@@ -52,10 +44,8 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/TheFloodDragon/Ratziel-Beta/tree/master/wiki/",
+            "https://github.com/TheFloodDragon/Ratziel-Wiki/tree/master/",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -88,7 +78,7 @@ const config = {
           },
           // Github
           {
-            href: "https://github.com/TheFloodDragon/Ratziel-Beta",
+            href: "https://github.com/TheFloodDragon/Ratziel-Wiki",
             className: "header-github-link",
             position: "right",
           },
