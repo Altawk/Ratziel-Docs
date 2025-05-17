@@ -1,0 +1,1 @@
+(self.webpackChunkratziel_wiki=self.webpackChunkratziel_wiki||[]).push([[741],{5741:()=>{}}]);
