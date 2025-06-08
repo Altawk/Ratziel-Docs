@@ -15,7 +15,26 @@ sidebar_position: 6
 
 ## 组件列表
 
+:::info
+下面的有些组件严格来说不算 **物品组件**，但是功能相关，还是将它们列在下面。
+:::
 
+### 材料
+
+别名：`material`、`mat`、`mats`
+示例：
+```YAML
+material: diamound # 大钻石
+```
+
+### 物品名称
+
+别名：`name`、`display-name`、`displayName`
+隶属：`ItemDisplay`
+示例：
+```YAML
+name: "你好哇, 是香香软软的小南娘呢!"
+```
 
 ## API Usage
 

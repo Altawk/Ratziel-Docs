@@ -26,17 +26,17 @@ Ratziel插件提供了强大的自定义物品系统，支持多种功能，如�
 
 ### 基础属性
 
-| 属性 | 描述 | 示例 |
-| --- | --- | --- |
-| `material` / `mat` | 物品材质 | `DIAMOND_SWORD` |
-| `name` / `displayName` | 物品名称(支持颜色代码) | `"<red>神器"` |
-| `lore` | 物品描述(支持颜色代码) | `["<white>锋利无比", "<blue>带有魔力"]` |
-| `unbreakable` | 是否不可破坏 | `true` |
-| `custom-model-data` | 自定义模型数据 | `114514` |
-| `repair-cost` | 修复消耗 | `3` |
-| `enchantable` | 附魔等级 | `4` |
-| `glintOverride` | 是否覆盖附魔光效 | `false` |
-| `durability` | 耐久度 | `10000` |
+| 属性                   | 描述                   | 示例                                    |
+| ---------------------- | ---------------------- | --------------------------------------- |
+| `material` / `mat`     | 物品材质               | `DIAMOND_SWORD`                         |
+| `name` / `displayName` | 物品名称(支持颜色代码) | `"<red>神器"`                           |
+| `lore`                 | 物品描述(支持颜色代码) | `["<white>锋利无比", "<blue>带有魔力"]` |
+| `unbreakable`          | 是否不可破坏           | `true`                                  |
+| `custom-model-data`    | 自定义模型数据         | `114514`                                |
+| `repair-cost`          | 修复消耗               | `3`                                     |
+| `enchantable`          | 附魔等级               | `4`                                     |
+| `glintOverride`        | 是否覆盖附魔光效       | `false`                                 |
+| `durability`           | 耐久度                 | `10000`                                 |
 
 ### 头颅相关
 
@@ -153,15 +153,15 @@ Ratziel插件提供了强大的自定义物品系统，支持多种功能，如�
 
 ### 可用触发器列表
 
-| 触发器 | 描述 |
-| --- | --- |
-| `onAttack` | 使用物品攻击实体时触发 |
-| `onKill` | 使用物品击杀实体时触发 |
-| `onDamage` | 物品持有者受到伤害时触发 |
-| `onDrop` | 丢弃物品时触发 |
-| `onPick` | 拾取物品时触发 |
-| `onInteract` | 交互时触发 |
-| `onRelease` | 释放物品时触发 |
+| 触发器       | 描述                     |
+| ------------ | ------------------------ |
+| `onAttack`   | 使用物品攻击实体时触发   |
+| `onKill`     | 使用物品击杀实体时触发   |
+| `onDamage`   | 物品持有者受到伤害时触发 |
+| `onDrop`     | 丢弃物品时触发           |
+| `onPick`     | 拾取物品时触发           |
+| `onInteract` | 交互时触发               |
+| `onRelease`  | 释放物品时触发           |
 
 ## 物品标签
 
