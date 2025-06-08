@@ -22,6 +22,7 @@ sidebar_position: 6
 ### 材料
 
 别名：`material`、`mat`、`mats`
+
 示例：
 ```YAML
 material: diamound # 大钻石
@@ -30,13 +31,29 @@ material: diamound # 大钻石
 ### 物品名称
 
 别名：`name`、`display-name`、`displayName`
+
 隶属：`ItemDisplay`
+
 示例：
 ```YAML
 name: "你好哇, 是香香软软的小南娘呢!"
 ```
 
-## API Usage
+### 头颅
+
+别名：`head`、`skull`
+
+示例：
+```YAML
+head: MC_jiao_long # 正版玩家 ID
+```
+
+```YAML
+# Base64 也是支持的
+skull: e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODQ2ZTFlNTIyOTdhMTdhZmMxM2RhZWI1ZmFlMjZhMzQ4YzJlN2U4ZGVmMmM5MzJkZjI5YTExNzdiNTc5ZDU1ZSJ9fX0=
+```
+
+## API 用法
 
 ```JavaScript
 item.getComponent(ItemDisplay.class) // 获取组件
