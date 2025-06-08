@@ -44,8 +44,8 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
-          editUrl:
-            "https://github.com/TheFloodDragon/Ratziel-Docs/tree/master/",
+          editUrl: "https://github.com/TheFloodDragon/Ratziel-Docs/tree/master/",
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: "./src/css/custom.css",
