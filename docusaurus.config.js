@@ -45,7 +45,7 @@ const config = {
         docs: {
           sidebarPath: "./sidebars.js",
           editUrl:
-            "https://github.com/TheFloodDragon/Ratziel-Wiki/tree/master/",
+            "https://github.com/TheFloodDragon/Ratziel-Docs/tree/master/",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -78,7 +78,7 @@ const config = {
           },
           // Github
           {
-            href: "https://github.com/TheFloodDragon/Ratziel-Wiki",
+            href: "https://github.com/TheFloodDragon/Ratziel-Docs",
             className: "header-github-link",
             position: "right",
           },
