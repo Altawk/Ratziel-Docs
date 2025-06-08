@@ -224,7 +224,3 @@ utilityWand:
         
         event.setCancelled(true)
 ```
-
-## 其他案例
-
-更多案例请参考插件源码中的 `demo` 目录，或者查看插件官方网站获取更多社区分享的物品配置。 

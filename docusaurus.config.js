@@ -4,10 +4,8 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-// @ts-ignore
 import { themes as prismThemes } from "prism-react-renderer";
 
-// @ts-ignore
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 
@@ -15,7 +13,7 @@ const config = {
     // 标题前缀
     titlePrefix: "主页",
     // 开始按钮文字
-    start: "开始使用 🚀",
+    start: "快速开始 🥵",
   },
 
   // 标题部分
@@ -25,9 +23,7 @@ const config = {
   tagline: "强大的Minecraft物品与脚本定制插件",
   favicon: "img/favicon.ico",
 
-  // @ts-ignore
   url: "https://theflooddragon.github.io",
-  // @ts-ignore
   baseUrl: process.env.BASE_URL ?? '/',
 
   organizationName: "Altawk/TheFloodDragon",
@@ -44,7 +40,6 @@ const config = {
   presets: [
     [
       "classic",
-      // @ts-ignore
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
@@ -60,7 +55,6 @@ const config = {
   ],
 
   themeConfig:
-    // @ts-ignore
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
@@ -108,7 +102,6 @@ const config = {
     }),
   themes: [
     [
-      // @ts-ignore
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         hashed: true,
