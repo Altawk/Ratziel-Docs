@@ -28,6 +28,8 @@ sidebar_position: 6
 material: diamound # 大钻石
 ```
 
+---
+
 ### 物品名称
 
 别名：`name`、`display-name`、`displayName`
@@ -38,6 +40,53 @@ material: diamound # 大钻石
 ```YAML
 name: "你好哇, 是香香软软的小南娘呢!"
 ```
+
+---
+
+### 物品描述（Lore）
+
+别名：`lore`、`lores`
+
+隶属：`ItemDisplay`
+
+示例：
+```YAML
+lore:
+  - "<white>锋利无比"
+  - "<blue>带有魔力"
+```
+
+---
+
+### 附魔
+
+别名：`enchantment`、`enchantments`、`enchant`、`enchants`
+
+隶属：`ItemEnchant`
+
+示例：
+```YAML
+enchant:
+  DAMAGE_ALL: 5
+  FIRE_ASPECT: 2
+```
+
+---
+
+### 隐藏属性
+
+别名：`hideFlags`、`itemFlags`
+
+隶属：`ItemHideFlag`
+
+示例：
+```YAML
+hideFlags:
+  - HIDE_ATTRIBUTES
+  - HIDE_ENCHANTS
+```
+
+---
 
 ### 头颅
 
@@ -52,6 +101,8 @@ head: MC_jiao_long # 正版玩家 ID
 # Base64 也是支持的
 skull: e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODQ2ZTFlNTIyOTdhMTdhZmMxM2RhZWI1ZmFlMjZhMzQ4YzJlN2U4ZGVmMmM5MzJkZjI5YTExNzdiNTc5ZDU1ZSJ9fX0=
 ```
+
+---
 
 ## API 用法
 
