@@ -5,7 +5,7 @@ sidebar_position: 7
 
 # 动作触发器
 
-### onProcess
+## onProcess
 
 物品生成过程中触发
 
@@ -20,7 +20,7 @@ sidebar_position: 7
 
 ---
 
-### onInteract
+## onInteract
 
 玩家交互时触发。
 
@@ -34,14 +34,17 @@ sidebar_position: 7
 | `player` | 谁交互了     |
 | `item`   | Ratziel 物品 |
 
+---
 
-#### onLeft
+### onLeft
 
 左键交互触发。
 
 **别名：** `left`
 
-#### onRight
+---
+
+### onRight
 
 右键交互触发。
 
@@ -49,7 +52,7 @@ sidebar_position: 7
 
 ---
 
-#### onAttack
+### onAttack
 
 使用物品攻击实体时触发。
 
@@ -66,7 +69,7 @@ sidebar_position: 7
 
 ---
 
-### onKill
+## onKill
 
 击杀实体时触发。
 
@@ -83,7 +86,7 @@ sidebar_position: 7
 
 ---
 
-### onDrop
+## onDrop
 
 丢弃物品时触发。
 
@@ -100,7 +103,7 @@ sidebar_position: 7
 
 ---
 
-### onPick
+## onPick
 
 拾取物品时触发。
 
@@ -117,7 +120,7 @@ sidebar_position: 7
 
 ---
 
-### onDamage
+## onDamage
 
 持有者受到伤害时触发。
 
