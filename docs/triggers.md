@@ -9,7 +9,7 @@ sidebar_position: 7
 
 物品生成过程中触发
 
-**别名：** `release`
+**别名：** `process`
 
 **内置变量：**
 
@@ -31,7 +31,7 @@ sidebar_position: 7
 | 变量名   | 描述         |
 | -------- | ------------ |
 | `event`  | 事件         |
-| `player` | 谁交互了     |
+| `player` | 交互者       |
 | `item`   | Ratziel 物品 |
 
 ---
@@ -56,7 +56,7 @@ sidebar_position: 7
 
 使用物品攻击实体时触发。
 
-**别名：** `attack`
+**别名：** `attack`、`atk`
 
 **内置变量：**
 
