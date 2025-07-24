@@ -24,18 +24,6 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 | `item`   | RatzielItem  | 当前生成的 Ratziel 物品 |
 | `player` | Player       | 目标玩家（如果有）      |
 
-**示例：**
-```yaml
-MyItem:
-  meta:
-    material: DIAMOND_SWORD
-    action:
-      onProcess: |-
-        // 设置物品的初始数据
-        item.set("created_time", System.currentTimeMillis())
-        item.set("creator", player ? player.getName() : "Unknown")
-```
-
 ---
 
 ## 交互触发器
@@ -55,18 +43,6 @@ MyItem:
 | `event`  | PlayerWorldContactEvent | 交互事件对象   |
 | `player` | Player                  | 交互的玩家     |
 | `item`   | RatzielItem             | 使用的物品     |
-
-**示例：**
-```yaml
-InteractiveItem:
-  meta:
-    material: STICK
-    action:
-      onInteract: |-
-        player.sendMessage("你与物品进行了交互！")
-        // 取消事件以防止默认行为
-        event.setCancelled(true)
-```
 
 ### onLeft
 
@@ -123,19 +99,6 @@ InteractiveItem:
 | `item`   | RatzielItem | 使用的武器     |
 | `target` | Entity      | 被攻击的实体   |
 
-**示例：**
-```yaml
-PowerfulSword:
-  meta:
-    material: DIAMOND_SWORD
-    action:
-      onAttack: |-
-        // 增加伤害
-        event.getAction().getSource().setDamage(20.0)
-        // 添加击退效果
-        target.setVelocity(target.getVelocity().add(player.getLocation().getDirection().multiply(2)))
-```
-
 ### onKill
 
 击杀实体时触发。
@@ -153,21 +116,6 @@ PowerfulSword:
 | `killer` | Player           | 击杀者（别名） |
 | `item`   | RatzielItem      | 使用的武器     |
 | `entity` | Entity           | 被击杀的实体   |
-
-**示例：**
-```yaml
-KillCounter:
-  meta:
-    material: DIAMOND_SWORD
-    data:
-      kill_count: 0
-    action:
-      onKill: |-
-        // 增加击杀计数
-        count = item.get("kill_count") || 0
-        item.set("kill_count", count + 1)
-        player.sendMessage("击杀数: " + (count + 1))
-```
 
 ---
 
@@ -236,16 +184,12 @@ KillCounter:
 
 **示例：**
 ```yaml
-TickItem:
-  meta:
-    material: CLOCK
-    action:
-      onTick:
-        period: 20  # 每秒触发一次
-        slot: MAIN_HAND
-        run: |-
-          // 每秒执行的逻辑
-          player.sendActionBar("时间: " + System.currentTimeMillis())
+onTick:
+  period: 20  # 每秒触发一次
+  slot: MAIN_HAND
+  run: |-
+    // 每秒执行的逻辑
+    player.sendActionBar("时间: " + System.currentTimeMillis())
 ```
 
 ### onDamage
@@ -265,51 +209,3 @@ TickItem:
 | `item`   | RatzielItem        | 持有的物品     |
 
 ---
-
-## 触发器使用技巧
-
-### 条件执行
-
-```yaml
-ConditionalItem:
-  meta:
-    action:
-      onInteract: |-
-        if (player.getHealth() > 10) {
-          player.sendMessage("血量充足")
-        } else {
-          player.sendMessage("血量不足")
-          player.setHealth(20)
-        }
-```
-
-### 冷却系统
-
-```yaml
-CooldownItem:
-  meta:
-    action:
-      onInteract: |-
-        cd = item.service.get(Cooldown).get(player, "INTERACT")
-        if (cd.isInCooldown()) {
-          player.sendMessage("冷却中...")
-          event.setCancelled(true)
-        } else {
-          cd.setCooldown("5s")
-          player.sendMessage("技能释放！")
-        }
-```
-
-### 数据持久化
-
-```yaml
-DataItem:
-  meta:
-    data:
-      usage_count: 0
-    action:
-      onInteract: |-
-        count = item.get("usage_count") || 0
-        item.set("usage_count", count + 1)
-        player.sendMessage("使用次数: " + (count + 1))
-```
