@@ -224,3 +224,337 @@ utilityWand:
         
         event.setCancelled(true)
 ```
+
+## 进阶系统案例
+
+### 升级武器系统
+
+一个可以通过击杀怪物获得经验并升级的武器系统。
+
+```yaml
+EvolvingSword:
+  meta:
+    material: IRON_SWORD
+    name: "<gradient:yellow:red>进化之剑</gradient> <gray>[Lv.{dynamic:data:level}]"
+    lore:
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<yellow>⚔ 等级: <white>{dynamic:data:level}"
+      - "<blue>📊 经验: <white>{dynamic:data:experience}/{dynamic:data:max_experience}"
+      - "<red>💀 击杀: <white>{dynamic:data:kill_count}"
+      - "<green>💎 攻击力: <white>{define:attack_damage}"
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<aqua>每次击杀获得经验，升级提升属性"
+
+    data:
+      level: 1
+      experience: 0
+      max_experience: 100
+      kill_count: 0
+
+    define:
+      attack_damage: |-
+        level = item.get("level") || 1
+        return 5 + (level * 2)
+
+      sharpness_level: |-
+        level = item.get("level") || 1
+        return Math.min(level, 5)
+
+    enchant:
+      SHARPNESS: "{define:sharpness_level}"
+      UNBREAKING: 3
+
+    action:
+      onKill: |-
+        level = item.get("level") || 1
+        exp = item.get("experience") || 0
+        maxExp = item.get("max_experience") || 100
+        killCount = item.get("kill_count") || 0
+
+        expGain = 10 + (level * 2)
+        newExp = exp + expGain
+        newKillCount = killCount + 1
+
+        item.set("kill_count", newKillCount)
+
+        if (newExp >= maxExp) {
+          newLevel = level + 1
+          newExp = 0
+          newMaxExp = maxExp + (50 * newLevel)
+
+          item.set("level", newLevel)
+          item.set("experience", newExp)
+          item.set("max_experience", newMaxExp)
+
+          player.sendMessage("<gold>⭐ 武器升级到 " + newLevel + " 级!")
+          player.sendTitle("<gold>武器升级!", "<yellow>等级 " + newLevel, 10, 40, 10)
+          player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1)
+        } else {
+          item.set("experience", newExp)
+          player.sendMessage("<green>+" + expGain + " 经验 (" + newExp + "/" + maxExp + ")")
+        }
+```
+
+### 技能法杖系统
+
+一个具有多种技能和法力系统的魔法武器。
+
+```yaml
+MagicWand:
+  meta:
+    material: BLAZE_ROD
+    name: "<rainbow>魔法法杖</rainbow>"
+    lore:
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<blue>🔮 法力: <white>{dynamic:data:mana}/{dynamic:data:max_mana}"
+      - "<purple>✨ 技能等级: <white>{dynamic:data:skill_level}"
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<yellow>左键: 火球术 (消耗 10 法力)"
+      - "<green>右键: 治疗术 (消耗 15 法力)"
+      - "<blue>Shift+右键: 传送术 (消耗 25 法力)"
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<red>冷却时间: 2秒"
+
+    data:
+      mana: 100
+      max_mana: 100
+      skill_level: 1
+      last_use: 0
+
+    action:
+      # 火球术
+      onLeft: |-
+        currentTime = System.currentTimeMillis()
+        lastUse = item.get("last_use") || 0
+        mana = item.get("mana") || 0
+        skillLevel = item.get("skill_level") || 1
+
+        if (currentTime - lastUse < 2000) {
+          player.sendMessage("<red>技能冷却中...")
+          return
+        }
+
+        if (mana < 10) {
+          player.sendMessage("<red>法力不足!")
+          return
+        }
+
+        item.set("mana", mana - 10)
+        item.set("last_use", currentTime)
+
+        fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
+        fireball.setShooter(player)
+        fireball.setYield(1 + skillLevel)
+        fireball.setDirection(player.getEyeLocation().getDirection().multiply(2))
+
+        player.sendMessage("<yellow>🔥 火球术!")
+        player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 1, 1)
+
+      # 治疗术
+      onRight: |-
+        if (player.isSneaking()) return  // 避免与传送术冲突
+
+        currentTime = System.currentTimeMillis()
+        lastUse = item.get("last_use") || 0
+        mana = item.get("mana") || 0
+        skillLevel = item.get("skill_level") || 1
+
+        if (currentTime - lastUse < 2000) {
+          player.sendMessage("<red>技能冷却中...")
+          return
+        }
+
+        if (mana < 15) {
+          player.sendMessage("<red>法力不足!")
+          return
+        }
+
+        item.set("mana", mana - 15)
+        item.set("last_use", currentTime)
+
+        healAmount = 4 + (skillLevel * 2)
+        newHealth = Math.min(player.getHealth() + healAmount, player.getMaxHealth())
+        player.setHealth(newHealth)
+
+        player.sendMessage("<green>💚 治疗术! 恢复 " + healAmount + " 生命值")
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1.5)
+
+      # 传送术
+      onRightShift: |-
+        currentTime = System.currentTimeMillis()
+        lastUse = item.get("last_use") || 0
+        mana = item.get("mana") || 0
+
+        if (currentTime - lastUse < 2000) {
+          player.sendMessage("<red>技能冷却中...")
+          return
+        }
+
+        if (mana < 25) {
+          player.sendMessage("<red>法力不足!")
+          return
+        }
+
+        block = player.getTargetBlock(null, 50)
+        if (block && block.getType() != Material.AIR) {
+          location = block.getLocation().add(0, 1, 0)
+          player.teleport(location)
+
+          item.set("mana", mana - 25)
+          item.set("last_use", currentTime)
+
+          player.sendMessage("<purple>✨ 传送术!")
+          player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1)
+        } else {
+          player.sendMessage("<red>无法传送到该位置!")
+        }
+
+      # 法力回复
+      onTick:
+        period: 40  # 每2秒
+        run: |-
+          mana = item.get("mana") || 0
+          maxMana = item.get("max_mana") || 100
+          if (mana < maxMana) {
+            item.set("mana", Math.min(mana + 5, maxMana))
+          }
+
+      # 技能升级
+      onKill: |-
+        skillLevel = item.get("skill_level") || 1
+        if (Math.random() < 0.1 && skillLevel < 10) {  // 10% 概率升级
+          item.set("skill_level", skillLevel + 1)
+          player.sendMessage("<purple>🌟 技能等级提升到 " + (skillLevel + 1) + " 级!")
+        }
+```
+
+### 多功能工具箱
+
+一个集成了多种实用功能的工具。
+
+```yaml
+UtilityToolbox:
+  meta:
+    material: ENDER_CHEST
+    name: "<gradient:blue:purple>多功能工具箱</gradient>"
+    lore:
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<yellow>当前模式: <white>{dynamic:data:mode}"
+      - "<blue>使用次数: <white>{dynamic:data:usage_count}"
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<green>右键: 打开功能菜单"
+      - "<yellow>Shift+右键: 切换模式"
+      - "<red>左键: 执行当前模式功能"
+      - "<gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<aqua>模式列表:"
+      - "<white>  • 挖掘模式 - 快速挖掘"
+      - "<white>  • 建造模式 - 快速建造"
+      - "<white>  • 修复模式 - 修复物品"
+      - "<white>  • 清理模式 - 清理背包"
+
+    data:
+      mode: "挖掘模式"
+      usage_count: 0
+      modes: ["挖掘模式", "建造模式", "修复模式", "清理模式"]
+
+    action:
+      # 功能菜单
+      onRight: |-
+        if (player.isSneaking()) return
+
+        player.sendMessage("<blue>━━━━━━ 工具箱功能菜单 ━━━━━━")
+        player.sendMessage("<yellow>当前模式: <white>" + (item.get("mode") || "挖掘模式"))
+        player.sendMessage("<green>可用功能:")
+        player.sendMessage("<white>  1. 挖掘模式 - 3x3 范围挖掘")
+        player.sendMessage("<white>  2. 建造模式 - 快速放置方块")
+        player.sendMessage("<white>  3. 修复模式 - 修复手中物品")
+        player.sendMessage("<white>  4. 清理模式 - 整理背包物品")
+        player.sendMessage("<gray>使用 Shift+右键 切换模式")
+
+      # 切换模式
+      onRightShift: |-
+        modes = item.get("modes") || ["挖掘模式", "建造模式", "修复模式", "清理模式"]
+        currentMode = item.get("mode") || "挖掘模式"
+
+        currentIndex = modes.indexOf(currentMode)
+        nextIndex = (currentIndex + 1) % modes.length
+        nextMode = modes[nextIndex]
+
+        item.set("mode", nextMode)
+        player.sendMessage("<green>切换到: <yellow>" + nextMode)
+        player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1)
+
+      # 执行功能
+      onLeft: |-
+        mode = item.get("mode") || "挖掘模式"
+        usageCount = item.get("usage_count") || 0
+
+        item.set("usage_count", usageCount + 1)
+
+        if (mode == "挖掘模式") {
+          // 3x3 挖掘
+          block = player.getTargetBlock(null, 5)
+          if (block && block.getType() != Material.AIR) {
+            center = block.getLocation()
+            world = center.getWorld()
+
+            for (x = -1; x <= 1; x++) {
+              for (y = -1; y <= 1; y++) {
+                for (z = -1; z <= 1; z++) {
+                  loc = center.clone().add(x, y, z)
+                  targetBlock = world.getBlockAt(loc)
+                  if (targetBlock.getType() != Material.AIR && targetBlock.getType() != Material.BEDROCK) {
+                    targetBlock.breakNaturally()
+                  }
+                }
+              }
+            }
+            player.sendMessage("<yellow>⛏ 3x3 挖掘完成!")
+          }
+        } else if (mode == "修复模式") {
+          // 修复物品
+          mainHand = player.getInventory().getItemInMainHand()
+          if (mainHand && mainHand.getType().getMaxDurability() > 0) {
+            meta = mainHand.getItemMeta()
+            if (meta instanceof Damageable) {
+              meta.setDamage(0)
+              mainHand.setItemMeta(meta)
+              player.sendMessage("<green>🔧 物品已修复!")
+            }
+          } else {
+            player.sendMessage("<red>手中没有可修复的物品!")
+          }
+        } else if (mode == "清理模式") {
+          // 整理背包
+          inventory = player.getInventory()
+          items = {}
+
+          // 统计物品
+          for (i = 0; i < 36; i++) {
+            item = inventory.getItem(i)
+            if (item && item.getType() != Material.AIR) {
+              type = item.getType()
+              if (!items[type]) items[type] = 0
+              items[type] += item.getAmount()
+              inventory.setItem(i, null)
+            }
+          }
+
+          // 重新放置
+          slot = 0
+          for (type in items) {
+            amount = items[type]
+            maxStack = Material[type].getMaxStackSize()
+
+            while (amount > 0 && slot < 36) {
+              stackSize = Math.min(amount, maxStack)
+              newItem = new ItemStack(Material[type], stackSize)
+              inventory.setItem(slot, newItem)
+              amount -= stackSize
+              slot++
+            }
+          }
+
+          player.sendMessage("<blue>📦 背包已整理!")
+        }
+```

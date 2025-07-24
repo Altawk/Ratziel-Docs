@@ -1,7 +1,9 @@
 {
-    "label": "施工中",
-    "position": 10000,
+    "label": "使用指南",
+    "position": 2,
     "link": {
-        "type": "generated-index"
+        "type": "generated-index",
+        "title": "Ratziel 使用指南",
+        "description": "详细的 Ratziel 插件使用指南，包括安装、配置、物品系统、脚本编写等完整教程。"
     }
 }
