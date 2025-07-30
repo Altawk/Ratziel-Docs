@@ -7,9 +7,7 @@ sidebar_position: 7
 
 Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时执行自定义脚本。每个触发器都有其特定的触发条件和可用变量。
 
-## 基础触发器
-
-### onProcess
+## onProcess
 
 物品生成过程中触发，用于在物品创建时执行初始化逻辑。
 
@@ -26,9 +24,7 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 ---
 
-## 交互触发器
-
-### onInteract
+## onInteract
 
 玩家与物品交互时触发，包括左键和右键交互。
 
@@ -43,6 +39,8 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 | `event`  | PlayerWorldContactEvent | 交互事件对象   |
 | `player` | Player                  | 交互的玩家     |
 | `item`   | RatzielItem             | 使用的物品     |
+
+---
 
 ### onLeft
 
@@ -64,8 +62,6 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 **继承变量：** 继承自 `onInteract` 的所有变量
 
-### 细分交互触发器
-
 #### onLeftClickAir / onRightClickAir
 
 **别名：** `onLeftAir`、`onRightAir`、`left-air`、`right-air`
@@ -80,9 +76,7 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 ---
 
-## 战斗触发器
-
-### onAttack
+## onAttack
 
 使用物品攻击实体时触发。
 
@@ -99,7 +93,9 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 | `item`   | RatzielItem | 使用的武器     |
 | `target` | Entity      | 被攻击的实体   |
 
-### onKill
+---
+
+## onKill
 
 击杀实体时触发。
 
@@ -119,9 +115,7 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 ---
 
-## 物品管理触发器
-
-### onDrop
+## onDrop
 
 丢弃物品时触发。
 
@@ -133,16 +127,18 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 | 变量名    | 类型        | 描述           |
 | --------- | ----------- | -------------- |
-| `event`   | DropEvent   | 丢弃事件       |
+| `event`   | PlayerDropItemEvent   | 丢弃事件       |
 | `player`  | Player      | 丢弃者         |
 | `item`    | RatzielItem | 被丢弃的物品   |
 | `dropped` | Item        | 掉落物实体     |
 
-### onPick
+---
+
+## onPick
 
 拾取物品时触发。
 
-**别名：** `pick`
+**别名：** `onPickedUp`、`pick`
 
 **触发时机：** 玩家拾取物品时
 
@@ -150,16 +146,14 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 | 变量名   | 类型        | 描述           |
 | -------- | ----------- | -------------- |
-| `event`  | PickupEvent | 拾取事件       |
+| `event`  | EntityPickupItemEvent | 拾取事件       |
 | `player` | Player      | 拾取者         |
 | `item`   | RatzielItem | 被拾取的物品   |
 | `picked` | Item        | 拾取物实体     |
 
 ---
 
-## 特殊触发器
-
-### onTick
+## onTick
 
 定时触发器，可以设置触发周期。
 
@@ -191,21 +185,3 @@ onTick:
     // 每秒执行的逻辑
     player.sendActionBar("时间: " + System.currentTimeMillis())
 ```
-
-### onDamage
-
-持有者受到伤害时触发。
-
-**别名：** `damage`
-
-**触发时机：** 物品持有者受到伤害时
-
-**内置变量：**
-
-| 变量名   | 类型               | 描述           |
-| -------- | ------------------ | -------------- |
-| `event`  | EntityDamageEvent  | 伤害事件       |
-| `player` | Player             | 受伤者         |
-| `item`   | RatzielItem        | 持有的物品     |
-
----

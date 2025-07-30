@@ -6,7 +6,7 @@ sidebar_position: 6
 # 物品组件
 
 :::info
-1.20.5，Mojang引入了[数据组件](https://zh.minecraft.wiki/w/%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6?variant=zh-cn)。此插件的组件以类似于其的方式工作。
+在Minecraft1.20.5版本中及往后，Mojang引入了[数据组件](https://zh.minecraft.wiki/w/%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6?variant=zh-cn)。此插件的组件以类似于其的方式工作。
 :::
 
 对物品的个性化配置需要使用**物品组件**。
