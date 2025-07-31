@@ -1,5 +1,6 @@
 ---
-sidebar_position: 4
+title: 配置文件
+sidebar_position: 1
 ---
 
 # 配置插件
@@ -11,7 +12,6 @@ Ratziel
 ├── lang ···················· 语言文件目录
 ├── workspace ··············· 工作空间目录
 ├── settings.yml ············ 插件配置文件
-└── kether.yml ·············· Kether 配置文件
 ```
 
 ## 主要配置文件
@@ -45,15 +45,10 @@ Script:
       enabled: true
       # 使用的脚本引擎 (Nashorn/GraalJS)
       engine: nashorn
-    # Kether (暂不支持)
-    Kether:
-      enabled: false
-      # 是否启用宽容解析
-      tolerance: true
     # Jexl
     Jexl:
       enabled: true
-    # Kotlin Scripting (暂不支持)
-    KotlinScripting:
-      enabled: false
+#    # Kotlin Scripting (暂不支持)
+#    KotlinScripting:
+#      enabled: false
 ```
