@@ -1,9 +1,9 @@
 ---
-title: 动作语句
+title: 动作语句块
 sidebar_position: 10
 ---
 
-# 动作语句
+# 动作语句块
 
 语句块（Executable Block）在 Ratziel 中用于执行代码逻辑。
 
@@ -11,9 +11,9 @@ sidebar_position: 10
 
 动作块系统采用解析器模式，将 JSON 配置元素转换为可执行的语句块。
 
-# 语法支持
+## 语法支持
 
-## 条件
+### 条件
 
 ```YAML
 if: <condition>
@@ -24,7 +24,7 @@ else:
   - <action3>
 ```
 
-## 脚本语言选择
+### 脚本语言选择
 
 ```YAML
 $js:
