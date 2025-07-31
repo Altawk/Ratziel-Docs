@@ -3,7 +3,7 @@ title: 标签解析器
 sidebar_position: 8
 ---
 
-# 简介
+# 标签解析器
 
 **标签解析器（Tag Resolver）** 在 Ratziel 中用于解析配置文件中标签用法。
 

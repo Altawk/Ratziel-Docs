@@ -3,9 +3,9 @@ title: 节点解析器
 sidebar_position: 9
 ---
 
-# 简介
+# 节点解析器
 
-节点解析器（Section Resolver）在 Ratziel 中用于处理配置文件节点。
+**节点解析器（Section Resolver）** 在 Ratziel 中用于处理配置文件节点。
 
 它们在物品生成过程中对配置的各个部分进行预处理和解析，实现继承、标签解析、脚本处理等功能。
 
