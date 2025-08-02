@@ -26,7 +26,7 @@ Ratziel 支持多种配置文件格式，如 YAML、JSON、HOCON、TOML 等。
 
 如下我们创建了一个文件，并在其中添加了以下内容：
 
-```YAML title=plugins/Ratziel/workspace/example.yml
+```YAML title="plugins/Ratziel/workspace/example.yml"
 ExampleItem: # 物品ID
   item: # 告诉插件这是一个物品，而不是其他什么东西
     ...
