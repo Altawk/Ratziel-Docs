@@ -6,12 +6,12 @@ sidebar_position: 1
 # 物品组件
 
 :::info
-在Minecraft1.20.5版本中及往后，Mojang引入了[数据组件](https://zh.minecraft.wiki/w/%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6?variant=zh-cn)。此插件的组件以类似于其的方式工作。
+在 Minecraft1.20.5 版本中及往后，Mojang引入了[数据组件](https://zh.minecraft.wiki/w/%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6?variant=zh-cn)。此插件的组件以类似于其的方式工作。
 :::
 
 对物品的个性化配置需要使用**物品组件**。
 
-像 *物品名称*、*物品描述（Lore）*、*附魔* 等等都可以通过 **物品组件** 来实现。
+像 *显示名称*、*物品描述（Lore）*、*附魔* 等等都可以通过 **物品组件** 来实现。
 
 ## 组件列表
 
@@ -19,24 +19,13 @@ sidebar_position: 1
 下面的有些组件严格来说不算 **物品组件**，但是功能相关，还是将它们列在下面。
 :::
 
-### 材料
+### 显示名称
 
-别名：`material`、`mat`、`mats`
+**节点名：** `name`、`display-name`、`displayName`
 
-示例：
-```YAML
-material: diamound # 大钻石
-```
+**隶属：** `ItemDisplay`
 
----
-
-### 物品名称
-
-别名：`name`、`display-name`、`displayName`
-
-隶属：`ItemDisplay`
-
-示例：
+**示例：**
 ```YAML
 name: "你好哇, 是香香软软的小南娘呢!"
 ```
@@ -45,11 +34,11 @@ name: "你好哇, 是香香软软的小南娘呢!"
 
 ### 物品描述（Lore）
 
-别名：`lore`、`lores`
+**节点名：** `lore`、`lores`
 
-隶属：`ItemDisplay`
+**隶属：** `ItemDisplay`
 
-示例：
+**示例：**
 ```YAML
 lore:
   - "<white>锋利无比"
@@ -58,13 +47,26 @@ lore:
 
 ---
 
+### 本地化名称 (物品名称 Item Name)
+
+**节点名：** `localizedName`、`localized-name`、`itemName`、`item-name`
+
+**隶属：** `ItemDisplay`
+
+**示例：**
+```YAML
+item-name: "钻石剑"
+```
+
+---
+
 ### 附魔
 
-别名：`enchantment`、`enchantments`、`enchant`、`enchants`
+**节点名：**`enchantment`、`enchantments`、`enchant`、`enchants`
 
-隶属：`ItemEnchant`
+**隶属：**`ItemEnchant`
 
-示例：
+**示例：**
 ```YAML
 enchant:
   DAMAGE_ALL: 5
@@ -75,11 +77,11 @@ enchant:
 
 ### 隐藏属性
 
-别名：`hideFlags`、`itemFlags`
+**节点名：**`hideFlags`、`itemFlags`
 
-隶属：`ItemHideFlag`
+**隶属：**`ItemHideFlag`
 
-示例：
+**示例：**
 ```YAML
 hideFlags:
   - HIDE_ATTRIBUTES
@@ -90,9 +92,9 @@ hideFlags:
 
 ### 头颅
 
-别名：`head`、`skull`
+**节点名：**`head`、`skull`
 
-示例：
+**示例：**
 ```YAML
 head: MC_jiao_long # 正版玩家 ID
 ```

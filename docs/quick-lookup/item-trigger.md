@@ -74,7 +74,7 @@ sidebar_position: 4
 
 **父触发器：onLeft / onRight**
 
-**别名：** `onLeftAir`、`onRightAir`、`left-air`、`right-air`
+**别名：** `onLeftAir`、`left-air` / `onRightAir`、`right-air`
 
 **触发时机：** 左键/右键点击空气时
 
@@ -82,7 +82,15 @@ sidebar_position: 4
 
 **父触发器：onLeft / onRight**
 
-**别名：** `onLeftBlock`、`onRightBlock`、`left-block`、`right-block`
+**别名：** `onLeftBlock`、`left-block` / `onRightBlock`、`right-block`
+
+**触发时机：** 左键/右键点击方块时
+
+#### onLeftClickEntity / onRightClickEntity
+
+**父触发器：onLeft / onRight**
+
+**别名：** `onLeftEntity`、`left-entity` / `onRightEntity`、`right-entity`
 
 **触发时机：** 左键/右键点击方块时
 
@@ -92,7 +100,9 @@ sidebar_position: 4
 
 使用物品攻击实体时触发。
 
-**别名：** `attack`、`atk`
+**父触发器：onLeftClickEntity**
+
+**别名：** `attack`、`atk`、`onAtk`
 
 **触发时机：** 玩家使用物品攻击其他实体时
 
@@ -107,7 +117,7 @@ sidebar_position: 4
 
 ---
 
-## onKill
+## onKill - 击杀
 
 击杀实体时触发。
 
@@ -173,12 +183,19 @@ sidebar_position: 4
 
 **触发时机：** 按设定周期持续触发
 
+**内置变量：**
+
+| 变量名   | 类型        | 描述           |
+| -------- | ----------- | -------------- |
+| `player` | Player      | 玩家           |
+| `item`   | RatzielItem | 指定栏位的物品 |
+
 **配置参数：**
 
-| 参数     | 类型   | 描述             | 默认值    |
-| -------- | ------ | ---------------- | --------- |
-| `period` | int    | 触发周期（tick） | 1         |
-| `slot`   | string | 检测的物品栏位   | MAIN_HAND |
+| 参数     | 描述             | 默认值    |
+| -------- | ---------------- | --------- |
+| `period` | 触发周期（tick） | 1         |
+| `slot`   | 检测的物品栏位   | MAIN_HAND |
 
 **可用栏位：**
 - `MAIN_HAND` - 主手
@@ -187,6 +204,7 @@ sidebar_position: 4
 - `CHESTPLATE` - 胸甲
 - `LEGGINGS` - 护腿
 - `BOOTS` - 靴子
+- 任意栏位 ID
 
 **示例：**
 ```yaml
