@@ -23,10 +23,10 @@ const config = {
   tagline: "强大的Minecraft物品与脚本定制插件",
   favicon: "img/favicon.ico",
 
-  url: "https://theflooddragon.github.io",
+  url: "https://altawk.github.io/",
   baseUrl: process.env.BASE_URL ?? '/',
 
-  organizationName: "Altawk/TheFloodDragon",
+  organizationName: "Altawk",
   projectName: "Ratziel-Wiki",
 
   onBrokenLinks: "warn",
@@ -44,7 +44,7 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
-          editUrl: "https://github.com/TheFloodDragon/Ratziel-Docs/tree/master/",
+          editUrl: "https://github.com/Altawk/Ratziel-Docs/tree/master/",
           showLastUpdateTime: true,
         },
         theme: {
@@ -78,7 +78,7 @@ const config = {
           },
           // Github
           {
-            href: "https://github.com/TheFloodDragon/Ratziel-Docs",
+            href: "https://github.com/Altawk/Ratziel-Docs",
             className: "header-github-link",
             position: "right",
           },
