@@ -37,6 +37,6 @@ ExampleItem:
 
 ## 文档速查
 
-物品触发器的完整列表参见 **[触发器](../triggers.md)**。
+物品触发器的完整列表参见 **[触发器](../quick-lookup/item-trigger.md)**。
 
-至于 **动作块** 具体支持什么语法，请看 **[动作语句块](../action-block.md)**。
+至于 **动作块** 具体支持什么语法，请看 **[动作语句块](../quick-lookup/action-block.md)**。

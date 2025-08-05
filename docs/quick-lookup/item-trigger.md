@@ -1,9 +1,9 @@
 ---
-title: 动作触发器
-sidebar_position: 7
+title: 物品触发器
+sidebar_position: 4
 ---
 
-# 动作触发器
+# 物品触发器
 
 插件提供了丰富的触发器，允许在特定事件发生时执行自定义动作块。
 
@@ -15,7 +15,7 @@ sidebar_position: 7
 **子触发器:** 子触发器触发时父触发器也会触发，同时子触发器继承父触发器的所有内置变量。
 :::
 
-## onPost (数据处理完成)
+## onPost - 数据处理完成
 
 物品生成过程中触发，用于在物品创建时执行初始化逻辑。
 
@@ -32,7 +32,7 @@ sidebar_position: 7
 
 ---
 
-## onInteract (交互)
+## onInteract - 交互
 
 玩家使用物品交互时触发，包括左键和右键交互等等。
 
@@ -50,7 +50,7 @@ sidebar_position: 7
 
 ---
 
-### onLeft (左键交互)
+### onLeft - 左键交互
 
 所有左键交互时触发。
 
@@ -60,7 +60,7 @@ sidebar_position: 7
 
 **触发时机：** 玩家左键点击时
 
-### onRight
+### onRight - 右键交互
 
 右键交互时触发。
 
@@ -88,7 +88,7 @@ sidebar_position: 7
 
 ---
 
-## onAttack
+## onAttack - 攻击
 
 使用物品攻击实体时触发。
 

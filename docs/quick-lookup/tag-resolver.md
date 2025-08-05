@@ -1,6 +1,6 @@
 ---
 title: 标签解析器
-sidebar_position: 8
+sidebar_position: 6
 ---
 
 # 标签解析器
