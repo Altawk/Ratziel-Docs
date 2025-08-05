@@ -5,28 +5,36 @@ sidebar_position: 7
 
 # 动作触发器
 
-Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时执行自定义脚本。每个触发器都有其特定的触发条件和可用变量。
+插件提供了丰富的触发器，允许在特定事件发生时执行自定义动作块。
 
-## onProcess
+每个触发器都有其特定的触发条件和可用变量。
+
+同时部分触发器还支持可配置额外条件。
+
+:::info
+**子触发器:** 子触发器触发时父触发器也会触发，同时子触发器继承父触发器的所有内置变量。
+:::
+
+## onPost (数据处理完成)
 
 物品生成过程中触发，用于在物品创建时执行初始化逻辑。
 
-**别名：** `process`
+**别名：** `post` (驿站)
 
 **触发时机：** 物品生成器创建物品时
 
 **内置变量：**
 
-| 变量名   | 类型         | 描述                    |
-| -------- | ------------ | ----------------------- |
-| `item`   | RatzielItem  | 当前生成的 Ratziel 物品 |
-| `player` | Player       | 目标玩家（如果有）      |
+| 变量名   | 类型        | 描述               |
+| -------- | ----------- | ------------------ |
+| `item`   | RatzielItem | RatzielItem 物品   |
+| `player` | Player      | 目标玩家（如果有） |
 
 ---
 
-## onInteract
+## onInteract (交互)
 
-玩家与物品交互时触发，包括左键和右键交互。
+玩家使用物品交互时触发，包括左键和右键交互等等。
 
 **别名：** `interact`、`Interact`
 
@@ -34,41 +42,45 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 **内置变量：**
 
-| 变量名   | 类型                    | 描述           |
-| -------- | ----------------------- | -------------- |
-| `event`  | PlayerWorldContactEvent | 交互事件对象   |
-| `player` | Player                  | 交互的玩家     |
-| `item`   | RatzielItem             | 使用的物品     |
+| 变量名   | 类型                    | 描述         |
+| -------- | ----------------------- | ------------ |
+| `event`  | PlayerWorldContactEvent | 交互事件对象 |
+| `player` | Player                  | 交互的玩家   |
+| `item`   | RatzielItem             | 使用的物品   |
 
 ---
 
-### onLeft
+### onLeft (左键交互)
 
-左键交互时触发。
+所有左键交互时触发。
+
+**父触发器：onInteract**
 
 **别名：** `left`
 
 **触发时机：** 玩家左键点击时
 
-**继承变量：** 继承自 `onInteract` 的所有变量
-
 ### onRight
 
 右键交互时触发。
+
+**父触发器：onInteract**
 
 **别名：** `right`
 
 **触发时机：** 玩家右键点击时
 
-**继承变量：** 继承自 `onInteract` 的所有变量
-
 #### onLeftClickAir / onRightClickAir
+
+**父触发器：onLeft / onRight**
 
 **别名：** `onLeftAir`、`onRightAir`、`left-air`、`right-air`
 
 **触发时机：** 左键/右键点击空气时
 
 #### onLeftClickBlock / onRightClickBlock
+
+**父触发器：onLeft / onRight**
 
 **别名：** `onLeftBlock`、`onRightBlock`、`left-block`、`right-block`
 
@@ -86,12 +98,12 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 **内置变量：**
 
-| 变量名   | 类型        | 描述           |
-| -------- | ----------- | -------------- |
-| `event`  | EntityEvent | 攻击事件       |
-| `player` | Player      | 攻击者         |
-| `item`   | RatzielItem | 使用的武器     |
-| `target` | Entity      | 被攻击的实体   |
+| 变量名   | 类型        | 描述         |
+| -------- | ----------- | ------------ |
+| `event`  | EntityEvent | 攻击事件     |
+| `player` | Player      | 攻击者       |
+| `item`   | RatzielItem | 使用的武器   |
+| `target` | Entity      | 被攻击的实体 |
 
 ---
 
@@ -125,12 +137,12 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 **内置变量：**
 
-| 变量名    | 类型        | 描述           |
-| --------- | ----------- | -------------- |
-| `event`   | PlayerDropItemEvent   | 丢弃事件       |
-| `player`  | Player      | 丢弃者         |
-| `item`    | RatzielItem | 被丢弃的物品   |
-| `dropped` | Item        | 掉落物实体     |
+| 变量名    | 类型                | 描述         |
+| --------- | ------------------- | ------------ |
+| `event`   | PlayerDropItemEvent | 丢弃事件     |
+| `player`  | Player              | 丢弃者       |
+| `item`    | RatzielItem         | 被丢弃的物品 |
+| `dropped` | Item                | 掉落物实体   |
 
 ---
 
@@ -144,12 +156,12 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 **内置变量：**
 
-| 变量名   | 类型        | 描述           |
-| -------- | ----------- | -------------- |
-| `event`  | EntityPickupItemEvent | 拾取事件       |
-| `player` | Player      | 拾取者         |
-| `item`   | RatzielItem | 被拾取的物品   |
-| `picked` | Item        | 拾取物实体     |
+| 变量名   | 类型                  | 描述         |
+| -------- | --------------------- | ------------ |
+| `event`  | EntityPickupItemEvent | 拾取事件     |
+| `player` | Player                | 拾取者       |
+| `item`   | RatzielItem           | 被拾取的物品 |
+| `picked` | Item                  | 拾取物实体   |
 
 ---
 
@@ -163,10 +175,10 @@ Ratziel 提供了丰富的触发器系统，允许物品在特定事件发生时
 
 **配置参数：**
 
-| 参数     | 类型   | 描述                           | 默认值    |
-| -------- | ------ | ------------------------------ | --------- |
-| `period` | int    | 触发周期（tick）               | 1         |
-| `slot`   | string | 检测的物品栏位                 | MAIN_HAND |
+| 参数     | 类型   | 描述             | 默认值    |
+| -------- | ------ | ---------------- | --------- |
+| `period` | int    | 触发周期（tick） | 1         |
+| `slot`   | string | 检测的物品栏位   | MAIN_HAND |
 
 **可用栏位：**
 - `MAIN_HAND` - 主手
