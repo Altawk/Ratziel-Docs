@@ -47,9 +47,7 @@ ExampleItem: # 物品ID
 
 ### 基础配置
 
-让我们来看看一个简单的物品配置：
-
-```YAML
+```YAML title="一个简单的物品配置"
 ExampleItem:
   item:
     material: DIAMOND_SWORD # 物品类型
@@ -62,13 +60,18 @@ ExampleItem:
 尽管配置简单，我们还是详细分析下这个配置：
 
 - `material` - **物品材料**
-  物品材料严格说属于 *物品源* 部分，是原版物品源。
+
+  物品材料严格说属于 **[物品源](../quick-lookup/item-source.md)** 部分，是原版物品源。  
   填写原版物品ID即可，插件会查找最接近的物品材料。
+
 - `name` - **显示名称**
-  显示名称属于 *物品组件* 部分，隶属 *ItemDisplay* 组件。
+
+  显示名称属于 **[物品组件](../quick-lookup/item-component.md)** 部分，隶属 *ItemDisplay* 组件。  
   支持 [MiniMessage](https://docs.advntr.dev/minimessage/format.html) 和 Legacy 等消息格式。*ItemDisplay* 组件的都支持这样的消息格式。
+
 - `lore` - **物品描述**
-  同上属于 *物品组件* 部分。
+
+  同上属于 **[物品组件](../quick-lookup/item-component.md)** 部分。  
   支持增强列表解析，即同一行内填写 `\n` 会自动换行。
 
 ### 文档速查

@@ -16,9 +16,7 @@ Ratziel
 
 ## 主要配置文件
 
-打开主要配置文件 `settings.yml` 后，你将看到如下内容：
-
-```YAML
+```YAML title="Ratziel/settings.yml"
 Workspaces:
   # 默认工作空间
   default:
