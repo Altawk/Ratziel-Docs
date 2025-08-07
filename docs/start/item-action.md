@@ -18,6 +18,8 @@ sidebar_position: 3
 
 ## 动作配置
 
+**节点名：** `actions`、`action`、`events`、`event`
+
 按照惯例，先看例子:
 
 ```YAML
