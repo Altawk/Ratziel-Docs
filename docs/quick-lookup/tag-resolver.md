@@ -53,13 +53,11 @@ Ratziel 提供两种类型的标签解析器：
 
 **示例：**
 ```yaml
-KillCounter:
-  meta:
-    name: "击杀计数器 (击杀: {dynamic:data:kill_count:0})"
-    data:
-      kill_count: 0
-    action:
-      onKill: 'item.set("kill_count", (item.get("kill_count") || 0) + 1)'
+name: "击杀计数器 (击杀: {dynamic:data:kill_count:0})"
+data:
+  kill_count: 0
+action:
+  onKill: 'item.set("kill_count", (item.get("kill_count") || 0) + 1)'
 ```
 
 ---
@@ -74,15 +72,13 @@ KillCounter:
 
 **示例：**
 ```yaml
-MagicWeapon:
-  meta:
-    name: "魔法武器 (攻击力: {computation:attack_power})"
-    computation:
-      attack_power: |-
-        level = item.get("level") || 1
-        return 10 + (level * 5)
-    data:
-      level: 1
+name: "魔法武器 (攻击力: {computation:attack_power})"
+computation:
+  attack_power: |-
+    level = item.get("level") || 1
+    return 10 + (level * 5)
+data:
+  level: 1
 ```
 
 ---
@@ -97,13 +93,11 @@ MagicWeapon:
 
 **示例：**
 ```yaml
-LiveStats:
-  meta:
-    name: "实时状态"
-    lore:
-      - "当前血量: {dynamic:data:health}"
-      - "当前法力: {dynamic:data:mana}"
-      - "在线时间: {dynamic:computation:online_time}"
+name: "实时状态"
+lore:
+  - "当前血量: {dynamic:data:health}"
+  - "当前法力: {dynamic:data:mana}"
+  - "在线时间: {dynamic:computation:online_time}"
 ```
 
 ---
@@ -120,13 +114,11 @@ LiveStats:
 
 **示例：**
 ```yaml
-RandomItem:
-  meta:
-    name: "随机物品"
-    lore:
-      - "随机数: {script:Math.floor(Math.random() * 100)}"
-      - "当前时间: {script:js:new Date().toLocaleString()}"
-      - "玩家名称: {script:player.getName()}"
+name: "随机物品"
+lore:
+  - "随机数: {script:Math.floor(Math.random() * 100)}"
+  - "当前时间: {script:js:new Date().toLocaleString()}"
+  - "玩家名称: {script:player.getName()}"
 ```
 
 ---

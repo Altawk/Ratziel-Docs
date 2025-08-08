@@ -15,16 +15,12 @@ PlaceholderAPI 解析器，处理 PAPI 变量。
 
 **示例：**
 ```yaml
-PapiItem:
-  meta:
-    material: PLAYER_HEAD
-    name: "玩家信息"
-    lore:
-      - "玩家: %player_name%"
-      - "等级: %player_level%"
-      - "血量: %player_health%"
-      - "位置: %player_x%, %player_y%, %player_z%"
-      - "余额: %vault_eco_balance%"
+lore:
+  - "玩家: %player_name%"
+  - "等级: %player_level%"
+  - "血量: %player_health%"
+  - "位置: %player_x%, %player_y%, %player_z%"
+  - "余额: %vault_eco_balance%"
 ```
 
 **注意：** 需要安装 PlaceholderAPI 插件及相关扩展。
@@ -52,7 +48,7 @@ PapiItem:
 **配置示例：**
 ```yaml
 BaseWeapon:
-  meta:
+  template:
     material: DIAMOND_SWORD
     name: "基础武器"
     attack_damage: 10
@@ -60,7 +56,7 @@ BaseWeapon:
       SHARPNESS: 3
 
 MyWeapon:
-  meta:
+  item:
     inherit: BaseWeapon  # 继承 BaseWeapon 的所有配置
     material: IRON_SWORD  # 覆盖材料
     name: "我的武器"      # 覆盖名称
