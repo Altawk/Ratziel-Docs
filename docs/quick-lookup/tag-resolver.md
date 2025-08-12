@@ -43,65 +43,6 @@ Ratziel 提供两种类型的标签解析器：
 
 ---
 
-### 数据解析器
-
-数据解析器，用于访问物品的数据层内容。
-
-**别名：** `data`
-
-**用法：** `{data:数据名称:默认值}`
-
-**示例：**
-```yaml
-name: "击杀计数器 (击杀: {dynamic:data:kill_count:0})"
-data:
-  kill_count: 0
-action:
-  onKill: 'item.set("kill_count", (item.get("kill_count") || 0) + 1)'
-```
-
----
-
-### 计算解析器
-
-计算解析器，用于访问计算层和属性层的内容。
-
-**别名：** `compute`、`computation`、`properties`、`prop`
-
-**用法：** `{compute:变量名称}`
-
-**示例：**
-```yaml
-name: "魔法武器 (攻击力: {computation:attack_power})"
-computation:
-  attack_power: |-
-    level = item.get("level") || 1
-    return 10 + (level * 5)
-data:
-  level: 1
-```
-
----
-
-### 动态解析器
-
-用于标记需要动态解析的内容。
-
-**别名：** `dynamic`
-
-**用法：** `{dynamic:解析器名称:参数}`
-
-**示例：**
-```yaml
-name: "实时状态"
-lore:
-  - "当前血量: {dynamic:data:health}"
-  - "当前法力: {dynamic:data:mana}"
-  - "在线时间: {dynamic:computation:online_time}"
-```
-
----
-
 ### 脚本解析器
 
 直接使用脚本显示信息。
@@ -120,18 +61,5 @@ lore:
   - "当前时间: {script:js:new Date().toLocaleString()}"
   - "玩家名称: {script:player.getName()}"
 ```
-
----
-
-
-### 模板解析器 (继承解析器)
-
-继承解析器，用于引用其他物品配置的内容。
-
-**别名：** `inherit`、`extend`
-
-**用法：**
-- `{inherit:模板ID:路径}`
-- `{inherit:模板ID.路径}`
 
 ---

@@ -137,7 +137,7 @@ sidebar_position: 4
 
 ---
 
-## onDrop
+## onDrop - 丢弃
 
 丢弃物品时触发。
 
@@ -156,7 +156,7 @@ sidebar_position: 4
 
 ---
 
-## onPick
+## onPick - 拾取
 
 拾取物品时触发。
 
@@ -175,7 +175,7 @@ sidebar_position: 4
 
 ---
 
-## onTick
+## onTick - 定时器
 
 定时触发器，可以设置触发周期。
 
