@@ -20,7 +20,7 @@ const config = {
   title: "Ratziel",
   titleDelimiter: "|",
   // 描述信息
-  tagline: "强大的Minecraft物品与脚本定制插件",
+  tagline: "强大的可定制化的物品与脚本插件",
   favicon: "img/favicon.ico",
 
   url: "https://altawk.github.io/",
