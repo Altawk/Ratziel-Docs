@@ -43,6 +43,65 @@ Ratziel 提供两种类型的标签解析器：
 
 ---
 
+### 数据解析器
+
+数据解析器，用于访问物品的数据层内容。
+
+**别名：** `data`
+
+**用法：** `{data:数据名称:默认值}`
+
+**示例：**
+```yaml
+data:
+  onwer: MC_jiao_long
+lore:
+  - "所有者: {data:owner:无名氏}"
+```
+
+---
+
+### 计算解析器
+
+计算解析器，用于访问计算层和属性层的内容。
+
+**别名：** `compute`、`computed`、`define`、`props`、`consts`
+
+**用法：** `{compute:变量名称}`
+
+**示例：**
+```yaml
+name: "魔法武器 (攻击力: {compute:attack_power})"
+compute:
+  attack_power: |-
+    level = item.get("level") || 1
+    return 10 + (level * 5)
+data:
+  level: 1
+```
+
+---
+
+### 动态解析器
+
+用于标记需要动态解析的内容。
+
+**别名：** `dynamic`
+
+**用法：** `{dynamic:解析器名称:参数}`
+
+**示例：**
+```yaml
+name: "杀敌数: {dynamic:data:kill_count}"
+data:
+  kill_count: 0
+action:
+  onKill:
+    - 'item.set("kill_count", item.get("kill_count") + 1)'
+```
+
+---
+
 ### 脚本解析器
 
 直接使用脚本显示信息。
@@ -61,5 +120,3 @@ lore:
   - "当前时间: {script:js:new Date().toLocaleString()}"
   - "玩家名称: {script:player.getName()}"
 ```
-
----

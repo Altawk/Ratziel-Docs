@@ -7,25 +7,9 @@ sidebar_position: 1
 
 **模板继承**允许你创建可重用的配置模板，通过继承机制大大简化物品配置工作，避免重复代码，提高配置的可维护性。
 
-
-## 核心概念
-
-### 模板（Template）
-模板是一个可被其他配置继承的基础配置单元，使用 `template` 元素类型定义。
-
-### 继承（Inheritance）
-子配置可以继承父模板的所有属性，并可以覆盖或扩展这些属性。
-
-### 继承链（Inheritance Chain）
-支持多级继承，形成从根模板到最终物品的完整继承链。
-
----
-
 ## 定义模板
 
-:::info
 **模板**是一个可被其他配置继承的基础配置单元，使用 `template` 元素类型定义。
-:::
 
 如下配置就定义了两个名为 `BaseWeapon` 和 `CoolDisplay` 的模板
 
@@ -53,7 +37,15 @@ CoolDisplay:
       - "<gray>━━━━━━━━━━━━━━━━━━━━"
 ```
 
-我们可在物品中使用 `inherit` 节点 (别名 `extend`) 来继承一个模板，如：
+## 继承模板
+
+### 合并式继承
+
+我们可在物品配置中使用 `inherit` 节点 (别名 `extend`) 来继承一个模板。
+
+它将通过一定的 **[合并策略](#合并策略)** 来合并模板中的数据。
+
+示例：
 
 ```yaml
 # 继承基础武器模板
@@ -69,16 +61,45 @@ FireSword:
       SHARPNESS: 5    # 覆盖锋利等级
 ```
 
+## 引用式继承
+
+你可以使用 **[标签](../quick-lookup/tag-resolver.md)** 来引用模板中的特定值，而无需定义继承节点。
+
+**标签别名：** `inherit`、`extend`
+
+**用法：** `{inherit:模板名:路径}` 或 `{inherit:模板名.路径}`
+
+**示例：**
+
+```yaml
+BaseStats:
+  template:
+    attack_damage: 15
+    defense: 8
+    speed: 1.2
+    description: "一把强力的武器"
+
+MyWeapon:
+  item:
+    material: DIAMOND_SWORD
+    name: "我的武器"
+    lore:
+      - "攻击力: {extend:BaseStats:attack_damage}"
+      - "防御力: {inherit:BaseStats.defense}"
+      - "速度: {extend:BaseStats:speed}"
+      - ""
+      - "{inherit:BaseStats.description}"
+```
+
+
 ---
 
-## 嵌套继承
+## 嵌套模板
 
 模板支持嵌套继承，即一个模板可以继承自另一个模板，形成多级继承关系。
 
 :::warning
-但请注意，不要让模板自己继承自己或者让父模板继承子模板，会造成循环继承。
-
-尽管插件会检测并发出警告，但还是要在写的时候注意下。
+不要让模板自己继承自己或者让父模板继承子模板，其会造成循环继承导致继承部分失效。（尽管插件会检测并发出警告）
 :::
 
 ```yaml
@@ -114,90 +135,36 @@ FireMagicSword:
       FIRE_ASPECT: 2
 ```
 
----
+## 动作继承
 
-## 标签使用
-
-### 基础标签语法
-
-使用 `{inherit:模板名:路径}` 或 `{inherit:模板名.路径}` 语法引用模板中的特定值：
+继承模板后，各级动作会形成动作链，按照从父到子的顺序执行：
 
 ```yaml
-BaseStats:
+BaseWeapon:
   template:
-    attack_damage: 15
-    defense: 8
-    speed: 1.2
-    description: "一把强力的武器"
+    action:
+      onAttack: 'player.sendMessage("基础攻击效果")'
+
+MagicWeapon:
+  template:
+    inherit: BaseWeapon
+    action:
+      onAttack: 'player.sendMessage("魔法攻击效果")'
 
 MyWeapon:
   item:
-    material: DIAMOND_SWORD
-    name: "我的武器"
-    lore:
-      - "攻击力: {inherit:BaseStats:attack_damage}"
-      - "防御力: {inherit:BaseStats.defense}"
-      - "速度: {inherit:BaseStats:speed}"
-      - ""
-      - "{inherit:BaseStats.description}"
+    inherit: MagicWeapon
+    action:
+      onAttack: 'player.sendMessage("我的武器攻击效果")'
 ```
 
-### 路径解析
+攻击后，玩家将会看到以下内容：
 
-支持复杂的路径解析，包括对象嵌套和数组索引：
-
-```yaml
-ComplexTemplate:
-  template:
-    stats:
-      combat:
-        attack: 20
-        defense: 15
-      magic:
-        power: 30
-        mana: 100
-    descriptions:
-      - "第一行描述"
-      - "第二行描述"
-      - "第三行描述"
-
-MyItem:
-  item:
-    name: "复杂物品"
-    lore:
-      - "攻击力: {inherit:ComplexTemplate:stats:combat:attack}"
-      - "魔法力量: {inherit:ComplexTemplate.stats.magic.power}"
-      - "描述: {inherit:ComplexTemplate:descriptions:[0]}"  # 数组索引
-      - "{inherit:ComplexTemplate.descriptions.[1]}"
-```
-
-### 多种路径格式
-
-```yaml
-# 支持的路径格式：
-# 1. 冒号分隔：{inherit:模板名:路径1:路径2:路径3}
-# 2. 点号分隔：{inherit:模板名.路径1.路径2.路径3}
-# 3. 混合格式：{inherit:模板名:路径1.路径2:路径3}
-# 4. 数组索引：{inherit:模板名:数组名:[索引]}
-
-WeaponTemplate:
-  template:
-    enchants:
-      primary: [SHARPNESS, UNBREAKING]
-      secondary: [FIRE_ASPECT, LOOTING]
-
-MyWeapon:
-  item:
-    lore:
-      - "主要附魔: {inherit:WeaponTemplate:enchants:primary:[0]}"
-      - "次要附魔: {inherit:WeaponTemplate.enchants.secondary.[0]}"
-```
-
----
+1. `基础攻击效果`
+2. `魔法攻击效果`
+3. `我的武器攻击效果`
 
 ## 合并策略
-
-### 对象合并
 
 对象类型的属性会进行深度合并，子配置的属性会覆盖父模板的同名属性：
 
@@ -236,8 +203,6 @@ MyWeapon:
       level: 5          # 被子配置覆盖
 ```
 
-### 数组合并
-
 数组类型的属性会被完全替换，不会进行合并：
 
 ```yaml
@@ -256,66 +221,15 @@ MyItem:
       - "新描述3"
 ```
 
-**结果：** `lore` 完全被子配置的内容替换。
-
----
-
-## 动作继承
-
-### 动作链执行
-
-继承的动作会形成执行链，按照从父到子的顺序执行：
+替换后会变成：
 
 ```yaml
-BaseWeapon:
-  template:
-    action:
-      onAttack: 'player.sendMessage("基础攻击效果")'
-
-MagicWeapon:
-  template:
-    inherit: BaseWeapon
-    action:
-      onAttack: 'player.sendMessage("魔法攻击效果")'
-
-MyWeapon:
+MyItem:
   item:
-    inherit: MagicWeapon
-    action:
-      onAttack: 'player.sendMessage("我的武器攻击效果")'
+    inherit: BaseItem
+    lore:
+      - "基础描述1"
+      - "基础描述2"
 ```
 
-**执行顺序：**
-1. BaseWeapon 的 onAttack
-2. MagicWeapon 的 onAttack  
-3. MyWeapon 的 onAttack
-
-### 动作优先级
-
-继承的动作具有比物品自身动作更高的优先级，确保父模板的逻辑先执行。
-
----
-
-## 循环继承检测
-
-系统会自动检测并阻止循环继承：
-
-```yaml
-# 错误示例 - 会被系统阻止
-TemplateA:
-  template:
-    inherit: TemplateB
-
-TemplateB:
-  template:
-    inherit: TemplateC
-
-TemplateC:
-  template:
-    inherit: TemplateA  # 循环继承！
-```
-
-**系统行为：**
-- 检测到循环继承时会输出警告
-- 停止继承链的构建
-- 使用已解析的部分配置
+如需要继承父模板的列表内容，请使用 **[引用式继承](#引用式继承)**。
