@@ -19,7 +19,7 @@ Ratziel 支持两种 JavaScript 引擎，提供了最强大的脚本编程能力
 
 ### Nashorn 引擎
 
-**标识符：** `$js`、`$nashorn`
+**标识符：** `js`、`nashorn`
 
 **特点：**
 - Java 8+ 内置引擎
@@ -37,7 +37,7 @@ Script:
 
 ### GraalJS 引擎
 
-**标识符：** `$graaljs`
+**标识符：** `graaljs`
 
 **特点：**
 - 高性能 JavaScript 引擎
@@ -55,7 +55,7 @@ Script:
 
 ## JEXL 表达式
 
-**标识符：** `$jexl`
+**标识符：** `jexl`
 
 **特点：**
 - 轻量级表达式语言

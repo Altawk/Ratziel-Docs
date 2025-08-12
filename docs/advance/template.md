@@ -61,9 +61,9 @@ FireSword:
       SHARPNESS: 5    # 覆盖锋利等级
 ```
 
-## 引用式继承
+### 引用式继承
 
-你可以使用 **[标签](../quick-lookup/tag-resolver.md)** 来引用模板中的特定值，而无需定义继承节点。
+你可以使用标签来引用模板中的特定值，而无需定义继承节点。
 
 **标签别名：** `inherit`、`extend`
 
@@ -91,6 +91,76 @@ MyWeapon:
       - "{inherit:BaseStats.description}"
 ```
 
+### 合并策略
+
+对象类型的属性会进行深度合并，子配置的属性会覆盖父模板的同名属性：
+
+```yaml
+BaseWeapon:
+  template:
+    enchant:
+      UNBREAKING: 3
+      SHARPNESS: 2
+    data:
+      durability: 1000
+      level: 1
+
+MyWeapon:
+  item:
+    inherit: BaseWeapon
+    enchant:
+      SHARPNESS: 5      # 覆盖父模板的锋利等级
+      FIRE_ASPECT: 2    # 添加新的附魔
+    data:
+      level: 5          # 覆盖等级
+      # durability: 1000 保持不变
+```
+
+最终效果：
+
+```yaml
+# 最终效果等同于：
+MyWeapon:
+  item:
+    enchant:
+      UNBREAKING: 3     # 来自父模板
+      SHARPNESS: 5      # 被子配置覆盖
+      FIRE_ASPECT: 2    # 子配置新增
+    data:
+      durability: 1000  # 来自父模板
+      level: 5          # 被子配置覆盖
+```
+
+数组类型的属性会被完全替换，不会进行合并：
+
+```yaml
+BaseItem:
+  template:
+    lore:
+      - "基础描述1"
+      - "基础描述2"
+
+MyItem:
+  item:
+    inherit: BaseItem
+    lore:
+      - "新描述1"
+      - "新描述2"
+      - "新描述3"
+```
+
+最终效果：
+
+```yaml
+MyItem:
+  item:
+    inherit: BaseItem
+    lore:
+      - "基础描述1"
+      - "基础描述2"
+```
+
+如需要继承父模板的列表内容，请使用 **[引用式继承](#引用式继承)**。
 
 ---
 
@@ -163,73 +233,3 @@ MyWeapon:
 1. `基础攻击效果`
 2. `魔法攻击效果`
 3. `我的武器攻击效果`
-
-## 合并策略
-
-对象类型的属性会进行深度合并，子配置的属性会覆盖父模板的同名属性：
-
-```yaml
-BaseWeapon:
-  template:
-    enchant:
-      UNBREAKING: 3
-      SHARPNESS: 2
-    data:
-      durability: 1000
-      level: 1
-
-MyWeapon:
-  item:
-    inherit: BaseWeapon
-    enchant:
-      SHARPNESS: 5      # 覆盖父模板的锋利等级
-      FIRE_ASPECT: 2    # 添加新的附魔
-    data:
-      level: 5          # 覆盖等级
-      # durability: 1000 保持不变
-```
-
-**合并结果：**
-```yaml
-# 最终效果等同于：
-MyWeapon:
-  item:
-    enchant:
-      UNBREAKING: 3     # 来自父模板
-      SHARPNESS: 5      # 被子配置覆盖
-      FIRE_ASPECT: 2    # 子配置新增
-    data:
-      durability: 1000  # 来自父模板
-      level: 5          # 被子配置覆盖
-```
-
-数组类型的属性会被完全替换，不会进行合并：
-
-```yaml
-BaseItem:
-  template:
-    lore:
-      - "基础描述1"
-      - "基础描述2"
-
-MyItem:
-  item:
-    inherit: BaseItem
-    lore:
-      - "新描述1"
-      - "新描述2"
-      - "新描述3"
-```
-
-替换后会变成：
-
-```yaml
-MyItem:
-  item:
-    inherit: BaseItem
-    lore:
-      - "基础描述1"
-      - "基础描述2"
-```
-
-如需要继承父模板的列表内容，请使用 **[引用式继承](#引用式继承)**。
