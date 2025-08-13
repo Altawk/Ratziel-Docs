@@ -23,7 +23,6 @@ function HeroSection() {
 
                         <p className={styles.heroDescription}>
                             Ratziel 提供直观的配置方式和强大的脚本引擎，
-                            <br>
                             释放您的全部创造力，构建真正独特的服务器体验。
                         </p>
 

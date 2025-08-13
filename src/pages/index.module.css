@@ -586,7 +586,7 @@
 }
 
 .pricingFooter {
-  margin-top: 80px;
+  margin-top: 60px;
   text-align: center;
 }
 
@@ -631,6 +631,7 @@
 
   .heroDescription {
     font-size: 18px;
+    white-space: pre;
   }
 
   .heroActions {
