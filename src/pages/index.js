@@ -23,7 +23,8 @@ function HeroSection() {
 
                         <p className={styles.heroDescription}>
                             Ratziel 提供直观的配置方式和强大的脚本引擎，
-
+                        </p>
+                        <p className={styles.heroDescription}>
                             释放您的全部创造力，构建真正独特的服务器体验。
                         </p>
 
@@ -49,15 +50,14 @@ function HeroSection() {
                             </div>
                             <div className={styles.demoBody}>
                                 <CodeBlock language="yaml">
-                                    {
-`MyFirstSword:
-    item:
-      material: DIAMOND_SWORD
-      name: "<gradient:red:orange>我的第一把剑</gradient>"
-      actions:
-        onRight: |-
-            fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
-            fireball.setShooter(player)
+                                    {`MyFirstSword:
+  item:
+    material: DIAMOND_SWORD
+    name: "<gradient:red:orange>我的第一把剑</gradient>"
+    actions:
+      onRight: |-
+          fireball = player.getWorld().spawn(player.getEyeLocation(), org.bukkit.entity.Fireball.class)
+          fireball.setShooter(player)
 `
                                     }
                                 </CodeBlock>
@@ -105,6 +105,10 @@ function PricingSection() {
                     </p>
                 </div>
 
+                <div className={styles.priceNote}>
+                    <p>💡 <strong>限时优惠：</strong>正式发售前享受特价，具体价格以作者实际报价为准</p>
+                </div>
+
                 <div className={styles.pricingContainer}>
                     {/* Free Plan */}
                     <div className={styles.pricingPlan}>
@@ -148,7 +152,7 @@ function PricingSection() {
                             <div className={styles.planPrice}>
                                 <span className={styles.currency}>￥</span>
                                 <span className={styles.price}>128</span>
-                                <div className={styles.originalPrice}>原价 ￥168</div>
+                                <span className={styles.originalPrice}>  原价 ￥168</span>
                             </div>
                             <p className={styles.planDesc}>售后服务，包你从入门到入土</p>
                         </div>
@@ -174,11 +178,8 @@ function PricingSection() {
                 </div>
 
                 <div className={styles.pricingFooter}>
-                    <div className={styles.priceNote}>
-                        <p>💡 <strong>限时优惠：</strong>正式发售前享受特价，具体价格以作者实际报价为准</p>
-                    </div>
                     <div className={styles.guarantee}>
-                        <p>✨ 30天质量保证 · 💻 终身更新 · 🛠️ 专业技术支持</p>
+                        <p>✨ 质量保证 · 💻 保持更新 · 🛠️ 技术支持</p>
                     </div>
                 </div>
             </div>
