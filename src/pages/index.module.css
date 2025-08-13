@@ -728,6 +728,7 @@
 
   .currency {
     font-size: 24px;
+    vertical-align: bottom;
   }
 }
 

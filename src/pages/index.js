@@ -50,15 +50,15 @@ function HeroSection() {
                             <div className={styles.demoBody}>
                                 <CodeBlock language="yaml">
                                     {
-                                        `MyFirstSword:
-                                           meta:
-                                             material: DIAMOND_SWORD
-                                               name: "<gradient:red:orange>我的第一把剑</gradient>"
-                                               action:
-                                               onRight: |-
-                                                 fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
-                                                 fireball.setShooter(player)
-                                        `
+`MyFirstSword:
+    item:
+      material: DIAMOND_SWORD
+      name: "<gradient:red:orange>我的第一把剑</gradient>"
+      actions:
+        onRight: |-
+            fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
+            fireball.setShooter(player)
+`
                                     }
                                 </CodeBlock>
                             </div>
