@@ -13,7 +13,7 @@ function HeroSection() {
                 <div className={styles.heroContent}>
                     <div className={styles.heroText}>
                         <div className={styles.heroBadge}>
-                            🚀 现代化 Minecraft 插件框架
+                            🚀 现代化 Minecraft 物品插件
                         </div>
                         
                         <Heading as="h1" className={styles.heroTitle}>
@@ -143,11 +143,11 @@ function PricingSection() {
                         <div className={styles.planHeader}>
                             <h3 className={styles.planTitle}>专业版</h3>
                             <div className={styles.planPrice}>
+                                <span className={styles.currency}>￥</span>      
                                 <span className={styles.price}>128</span>
-                                <span className={styles.currency}>￥</span>
                                 <div className={styles.originalPrice}>原价 ￥168</div>
                             </div>
-                            <p className={styles.planDesc}>完整功能，商业项目首选</p>
+                            <p className={styles.planDesc}>售后服务，包你从入门到入土</p>
                         </div>
                         
                         <ul className={styles.featureList}>

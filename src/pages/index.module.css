@@ -389,7 +389,6 @@
   background: linear-gradient(135deg, 
     var(--bg-white) 0%, 
     rgba(138, 154, 237, 0.03) 100%);
-  transform: scale(1.05);
 }
 
 .featured:hover {
@@ -430,6 +429,7 @@
   align-items: flex-start;
   gap: 8px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .price {
