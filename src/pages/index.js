@@ -23,8 +23,7 @@ function HeroSection() {
 
                         <p className={styles.heroDescription}>
                             Ratziel 提供直观的配置方式和强大的脚本引擎，
-                        </p>
-                        <p className={styles.heroDescription}>
+                            <br>
                             释放您的全部创造力，构建真正独特的服务器体验。
                         </p>
 
@@ -56,8 +55,8 @@ function HeroSection() {
     name: "<gradient:red:orange>我的第一把剑</gradient>"
     actions:
       onRight: |-
-          fireball = player.getWorld().spawn(player.getEyeLocation(), org.bukkit.entity.Fireball.class)
-          fireball.setShooter(player)
+        fireball = player.getWorld().spawn(player.getEyeLocation(), org.bukkit.entity.Fireball.class)
+        fireball.setShooter(player)
 `
                                     }
                                 </CodeBlock>
@@ -152,7 +151,7 @@ function PricingSection() {
                             <div className={styles.planPrice}>
                                 <span className={styles.currency}>￥</span>
                                 <span className={styles.price}>128</span>
-                                <span className={styles.originalPrice}>  原价 ￥168</span>
+                                <span className={styles.originalPrice}>原价 ￥168</span>
                             </div>
                             <p className={styles.planDesc}>售后服务，包你从入门到入土</p>
                         </div>

@@ -445,14 +445,14 @@
   font-weight: 600;
   color: var(--text-secondary);
   margin-left: 4px;
-  vertical-align: top;
+  vertical-align: bottom;
 }
 
 .originalPrice {
   font-size: 16px;
   color: var(--text-secondary);
   text-decoration: line-through;
-  margin-top: 8px;
+  margin-left: 8px;
   opacity: 0.7;
   width: 100%;
 }
@@ -592,6 +592,7 @@
 
 .priceNote {
   margin-bottom: 24px;
+  justify-content: center;
 }
 
 .priceNote p {
