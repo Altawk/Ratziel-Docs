@@ -23,6 +23,7 @@ function HeroSection() {
 
                         <p className={styles.heroDescription}>
                             Ratziel 提供直观的配置方式和强大的脚本引擎，
+
                             释放您的全部创造力，构建真正独特的服务器体验。
                         </p>
 
@@ -44,18 +45,20 @@ function HeroSection() {
                                     <span></span>
                                     <span></span>
                                 </div>
-                                <div className={styles.demoTitle}>my_items.yml</div>
+                                {/* <div className={styles.demoTitle}>my_items.yml</div> */}
                             </div>
                             <div className={styles.demoBody}>
                                 <CodeBlock language="yaml">
-                                    {`MyFirstSword:
-                                        meta:
-                                            material: DIAMOND_SWORD
-                                            name: "<gradient:red:orange>我的第一把剑</gradient>"
-                                            action:
-                                            onRight: |-
-                                                fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
-                                                fireball.setShooter(player)`
+                                    {
+                                        `MyFirstSword:
+                                           meta:
+                                             material: DIAMOND_SWORD
+                                               name: "<gradient:red:orange>我的第一把剑</gradient>"
+                                               action:
+                                               onRight: |-
+                                                 fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
+                                                 fireball.setShooter(player)
+                                        `
                                     }
                                 </CodeBlock>
                             </div>
@@ -139,7 +142,7 @@ function PricingSection() {
 
                     {/* Pro Plan */}
                     <div className={`${styles.pricingPlan} ${styles.featured}`}>
-                        <div className={styles.popularBadge}>最受欢迎</div>
+                        <div className={styles.popularBadge}>推荐方案</div>
                         <div className={styles.planHeader}>
                             <h3 className={styles.planTitle}>专业版</h3>
                             <div className={styles.planPrice}>
