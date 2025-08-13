@@ -15,17 +15,17 @@ function HeroSection() {
                         <div className={styles.heroBadge}>
                             🚀 现代化 Minecraft 物品插件
                         </div>
-                        
+
                         <Heading as="h1" className={styles.heroTitle}>
                             构建强大的
                             <span className={styles.titleHighlight}>物品系统</span>
                         </Heading>
-                        
+
                         <p className={styles.heroDescription}>
                             Ratziel 提供直观的配置方式和强大的脚本引擎，
-                            让创建复杂的 Minecraft 物品变得简单高效。
+                            释放您的全部创造力，构建真正独特的服务器体验。
                         </p>
-                        
+
                         <div className={styles.heroActions}>
                             <Link className={`${styles.btn} ${styles.btnPrimary}`} to="/docs/intro">
                                 开始使用
@@ -35,7 +35,7 @@ function HeroSection() {
                             </Link>
                         </div>
                     </div>
-                    
+
                     <div className={styles.heroVisual}>
                         <div className={styles.codeDemo}>
                             <div className={styles.demoHeader}>
@@ -48,14 +48,15 @@ function HeroSection() {
                             </div>
                             <div className={styles.demoBody}>
                                 <CodeBlock language="yaml">
-{`MyFirstSword:
-  meta:
-    material: DIAMOND_SWORD
-    name: "<gradient:red:orange>我的第一把剑</gradient>"
-    action:
-      onRight: |-
-        fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
-        fireball.setShooter(player)`}
+                                    {`MyFirstSword:
+                                        meta:
+                                            material: DIAMOND_SWORD
+                                            name: "<gradient:red:orange>我的第一把剑</gradient>"
+                                            action:
+                                            onRight: |-
+                                                fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class)
+                                                fireball.setShooter(player)`
+                                    }
                                 </CodeBlock>
                             </div>
                         </div>
@@ -95,12 +96,12 @@ function PricingSection() {
             <div className="container">
                 <div className={styles.pricingHeader}>
                     <span className={styles.pricingBadge}>定价方案</span>
-                    <h2 className={styles.pricingTitle}>选择适合的版本</h2>
+                    <h2 className={styles.pricingTitle}>选择合适的方案</h2>
                     <p className={styles.pricingSubtitle}>
                         无论是个人学习还是商业项目，我们都有合适的解决方案
                     </p>
                 </div>
-                
+
                 <div className={styles.pricingContainer}>
                     {/* Free Plan */}
                     <div className={styles.pricingPlan}>
@@ -111,17 +112,16 @@ function PricingSection() {
                             </div>
                             <p className={styles.planDesc}>开源版本，适合个人学习使用</p>
                         </div>
-                        
+
                         <ul className={styles.featureList}>
                             {features.free.map((feature, index) => (
                                 <li key={index} className={styles.feature}>
-                                    <span className={`${styles.featureIcon} ${
-                                        feature.included === true ? styles.included :
+                                    <span className={`${styles.featureIcon} ${feature.included === true ? styles.included :
                                         feature.included === 'partial' ? styles.partial :
-                                        styles.notIncluded
-                                    }`}>
+                                            styles.notIncluded
+                                        }`}>
                                         {feature.included === true ? '✓' :
-                                         feature.included === 'partial' ? '~' : '✗'}
+                                            feature.included === 'partial' ? '~' : '✗'}
                                     </span>
                                     <span className={styles.featureText}>
                                         {feature.text}
@@ -130,9 +130,9 @@ function PricingSection() {
                                 </li>
                             ))}
                         </ul>
-                        
-                        <Link className={`${styles.planButton} ${styles.secondaryButton}`} 
-                              to="https://github.com/TheFloodDragon/Ratziel-Beta">
+
+                        <Link className={`${styles.planButton} ${styles.secondaryButton}`}
+                            to="https://github.com/TheFloodDragon/Ratziel-Beta">
                             查看开源库
                         </Link>
                     </div>
@@ -143,13 +143,13 @@ function PricingSection() {
                         <div className={styles.planHeader}>
                             <h3 className={styles.planTitle}>专业版</h3>
                             <div className={styles.planPrice}>
-                                <span className={styles.currency}>￥</span>      
+                                <span className={styles.currency}>￥</span>
                                 <span className={styles.price}>128</span>
                                 <div className={styles.originalPrice}>原价 ￥168</div>
                             </div>
                             <p className={styles.planDesc}>售后服务，包你从入门到入土</p>
                         </div>
-                        
+
                         <ul className={styles.featureList}>
                             {features.pro.map((feature, index) => (
                                 <li key={index} className={styles.feature}>
@@ -158,18 +158,18 @@ function PricingSection() {
                                 </li>
                             ))}
                         </ul>
-                        
-                        <Link className={`${styles.planButton} ${styles.primaryButton}`} 
-                              to="https://qm.qq.com/q/ZyeXCHare">
+
+                        <Link className={`${styles.planButton} ${styles.primaryButton}`}
+                            to="https://qm.qq.com/q/ZyeXCHare">
                             立即购买
                         </Link>
-                        
+
                         <div className={styles.contactInfo}>
                             <p>作者QQ: <strong>1610105206</strong></p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div className={styles.pricingFooter}>
                     <div className={styles.priceNote}>
                         <p>💡 <strong>限时优惠：</strong>正式发售前享受特价，具体价格以作者实际报价为准</p>
