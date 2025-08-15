@@ -134,6 +134,7 @@
   margin: 0 0 40px 0;
   font-weight: 400;
   max-width: 60ch;
+  white-space: pre;
 }
 
 .heroActions {
@@ -592,7 +593,7 @@
 
 .priceNote {
   margin-bottom: 24px;
-  justify-content: center;
+  text-align: center;
 }
 
 .priceNote p {
@@ -704,6 +705,7 @@
 
   .heroDescription {
     font-size: 16px;
+    white-space: pre;
   }
 
   .heroActions {
