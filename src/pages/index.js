@@ -13,7 +13,7 @@ function HeroSection() {
                 <div className={styles.heroContent}>
                     <div className={styles.heroText}>
                         <div className={styles.heroBadge}>
-                            🚀 现代化 Minecraft 物品插件
+                            🚀 现代化的多功能物品插件
                         </div>
 
                         <Heading as="h1" className={styles.heroTitle}>

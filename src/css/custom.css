@@ -107,8 +107,9 @@ html {
 
 .navbar__inner {
   height: var(--navbar-height) !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
+  /* 居中还是在两边顶到 */
+  /* max-width: 1200px !important;
+  margin: 0 auto !important; */
   padding: 0 1.5rem !important;
   display: flex !important;
   align-items: center !important;
@@ -252,8 +253,6 @@ html {
   padding: 0.5rem !important;
   width: 36px !important;
   height: 36px !important;
-  color: var(--navbar-text) !important;
-  /* 影响 SVG currentColor */
   color: var(--navbar-text) !important;
 }
 

@@ -446,7 +446,7 @@
   font-weight: 600;
   color: var(--text-secondary);
   margin-left: 4px;
-  vertical-align: bottom;
+  margin-top: auto;
 }
 
 .originalPrice {
@@ -632,7 +632,6 @@
 
   .heroDescription {
     font-size: 18px;
-    white-space: pre-wrap;
   }
 
   .heroActions {
@@ -705,7 +704,6 @@
 
   .heroDescription {
     font-size: 16px;
-    white-space: pre-wrap;
   }
 
   .heroActions {
