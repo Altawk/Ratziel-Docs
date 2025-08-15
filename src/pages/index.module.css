@@ -134,7 +134,7 @@
   margin: 0 0 40px 0;
   font-weight: 400;
   max-width: 60ch;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .heroActions {
@@ -332,7 +332,7 @@
 
 .pricingHeader {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -592,7 +592,7 @@
 }
 
 .priceNote {
-  margin-bottom: 24px;
+  margin-bottom: 48px;
   text-align: center;
 }
 
@@ -632,7 +632,7 @@
 
   .heroDescription {
     font-size: 18px;
-    white-space: pre;
+    white-space: pre-wrap;
   }
 
   .heroActions {
@@ -705,7 +705,7 @@
 
   .heroDescription {
     font-size: 16px;
-    white-space: pre;
+    white-space: pre-wrap;
   }
 
   .heroActions {
