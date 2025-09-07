@@ -13,12 +13,12 @@ function HeroSection() {
                 <div className={styles.heroContent}>
                     <div className={styles.heroText}>
                         <div className={styles.heroBadge}>
-                            🚀 现代化的多功能物品插件
+                            🚀 基于脚本驱动的划时代多功能插件
                         </div>
 
                         <Heading as="h1" className={styles.heroTitle}>
-                            构建强大的
-                            <span className={styles.titleHighlight}>物品系统</span>
+                            现代化
+                            <span className={styles.titleHighlight}>物品插件</span>
                         </Heading>
 
                         <p className={styles.heroDescription}>
@@ -28,11 +28,12 @@ function HeroSection() {
 
                         <div className={styles.heroActions}>
                             <Link className={`${styles.btn} ${styles.btnPrimary}`} to="/docs/intro">
-                                开始使用
-                            </Link>
-                            <Link className={`${styles.btn} ${styles.btnSecondary}`} to="/docs/writing/installation">
                                 查看文档
+                                {/* 开始使用 */}
                             </Link>
+                            {/* <Link className={`${styles.btn} ${styles.btnSecondary}`} to="/docs/writing/installation">
+                                查看文档
+                            </Link> */}
                         </div>
                     </div>
 

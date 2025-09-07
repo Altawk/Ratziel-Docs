@@ -24,9 +24,23 @@ else:
   - <action3>
 ```
 
-### 脚本语言选择
+### 脚本语言支持
 
+**切换脚本语言**
 ```YAML
-$js:
+$js: # 切换脚本语言
   ... # 脚本内容
+```
+
+**导入类**
+```YAML
+imports: # 或者 import
+  - 'org.bukkit.inventory.ItemStack' # 导入类
+  - 'org.bukkit.*' # 导入包
+  - 'some_functions.js' # 导入脚本
+```
+
+**使用脚本文件**
+```YAML
+script: run.js # 这将直接执行脚本文件
 ```
