@@ -9,19 +9,17 @@ import { themes as prismThemes } from "prism-react-renderer";
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 
-  customFields: {
-    // 标题前缀
-    titlePrefix: "主页",
-    // 开始按钮文字
-    start: "快速开始 🥵",
-  },
-
   // 标题部分
   title: "Ratziel",
   titleDelimiter: "|",
   // 描述信息
   tagline: "强大的可定制化的物品与脚本插件",
   favicon: "img/favicon.ico",
+
+  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  future: {
+    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+  },
 
   url: "https://altawk.github.io/",
   baseUrl: process.env.BASE_URL ?? '/',
@@ -45,7 +43,9 @@ const config = {
         docs: {
           sidebarPath: "./sidebars.js",
           editUrl: "https://github.com/Altawk/Ratziel-Docs/tree/master/",
+          editLocalizedFiles: true,
           showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -108,6 +108,7 @@ const config = {
         language: ["en", "zh"],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
+        searchBarShortcutKeymap: "ctrl+shift+f",
         indexBlog: false,
         docsRouteBasePath: "/",
       },
