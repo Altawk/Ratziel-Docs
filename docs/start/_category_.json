@@ -1,8 +1,4 @@
 {
     "label": "入门指南",
-    "position": 2,
-    "link": {
-        "type": "generated-index",
-        "description": "入门指南，引导你创建第一个 Ratziel 物品。"
-    }
+    "position": 2
 }

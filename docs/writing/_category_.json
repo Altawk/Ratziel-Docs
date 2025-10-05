@@ -1,8 +1,4 @@
 {
-    "label": "文档编写",
-    "position": 999,
-    "link": {
-        "type": "generated-index",
-        "description": "这里是关于如何为 Ratziel Wiki 做出贡献的文档。"
-    }
+    "label": "Writing",
+    "position": 999
 }
