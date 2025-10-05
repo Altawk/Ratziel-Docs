@@ -25,7 +25,7 @@ const config = {
   baseUrl: process.env.BASE_URL ?? '/',
 
   organizationName: "Altawk",
-  projectName: "Ratziel-Wiki",
+  projectName: "Ratziel-Docs",
 
   onBrokenLinks: "warn",
 

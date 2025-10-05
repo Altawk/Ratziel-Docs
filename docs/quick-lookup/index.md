@@ -1,5 +1,6 @@
 ---
-title: 速查手册
+title: 文档速查
+id: quick-lookup
 ---
 
-速查手册，快速查找 Ratziel 的各种组件和配置项。
+速查文档，快速查找 Ratziel 的各种组件和配置项。
