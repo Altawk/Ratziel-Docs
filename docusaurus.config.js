@@ -19,10 +19,6 @@ const config = {
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true,
-    experimental_faster: {
-      rspackBundler: true, // required flag
-      rspackPersistentCache: true, // new flag
-    },
   },
 
   url: "https://altawk.github.io/",
@@ -32,7 +28,6 @@ const config = {
   projectName: "Ratziel-Wiki",
 
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
 
   i18n: {
     defaultLocale: "zh-Hans",
