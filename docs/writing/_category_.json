@@ -1,9 +1,8 @@
 {
-    "label": "施工中",
+    "label": "文档编写",
     "position": 999,
     "link": {
         "type": "generated-index",
-        "title": "别看别看别看",
-        "description": "别看别看别看"
+        "description": "这里是关于如何为 Ratziel Wiki 做出贡献的文档。"
     }
 }

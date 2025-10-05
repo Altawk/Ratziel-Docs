@@ -111,20 +111,6 @@ const config = {
       },
     }),
   themes: [
-<<<<<<< HEAD
-=======
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        hashed: true,
-        language: ["en", "zh"],
-        highlightSearchTermsOnTargetPage: true,
-        explicitSearchResultPath: true,
-        indexBlog: false,
-        docsRouteBasePath: "/",
-      },
-    ],
->>>>>>> 89cb64ff550e0d006c6631b8b9980ca536ce468c
   ],
 };
 

@@ -1,7 +1,8 @@
 {
-    "label": "脚本系统",
-    "position": 4,
+    "label": "脚本",
+    "position": 5,
     "link": {
-        "type": "generated-index"
+        "type": "generated-index",
+        "description": "了解 Ratziel 强大的脚本系统，实现更复杂的功能。"
     }
 }

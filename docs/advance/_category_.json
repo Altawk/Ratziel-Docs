@@ -1,7 +1,8 @@
 {
-    "label": "高级特性",
-    "position": 3,
+    "label": "深入 Ratziel",
+    "position": 4,
     "link": {
-        "type": "generated-index"
+        "type": "generated-index",
+        "description": "深入 Ratziel，了解更多高级特性和技巧。"
     }
 }
