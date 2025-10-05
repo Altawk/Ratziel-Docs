@@ -107,7 +107,7 @@ const config = {
         language: ["en", "zh"],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
-        searchBarShortcutKeymap: "ctrl+shift+f",
+        searchBarShortcutKeymap: "ctrl+f",
         indexBlog: false,
         docsRouteBasePath: "/",
       },
