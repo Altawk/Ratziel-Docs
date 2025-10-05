@@ -98,14 +98,20 @@ const config = {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
       },
-      algolia: {
-        appId: 'PMZUYBQDAK',
-        apiKey: '24b09689d5b4223813d9b8e48563c8f6',
-        indexName: 'ratziel',
-        askAi: 'askAIDemo',
-      },
     }),
   themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["en", "zh"],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        searchBarShortcutKeymap: "ctrl+shift+f",
+        indexBlog: false,
+        docsRouteBasePath: "/",
+      },
+    ],
   ],
 };
 
