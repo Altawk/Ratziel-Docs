@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkratziel_wiki=self.webpackChunkratziel_wiki||[]).push([[913],{8913:(e,i,k)=>{k.r(i)}}]);
