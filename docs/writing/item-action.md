@@ -201,7 +201,7 @@ OwnerItem:
     name: '<aqua>认主物品'
     action:
       onDrop:
-        - 'dropped.setCustomName(player.name + " 丢出的物品")'
+        - 'dropped.setCustomName(player.getName() + " 丢出的物品")'
         - 'dropped.setCustomNameVisible(true)'
 ```
 

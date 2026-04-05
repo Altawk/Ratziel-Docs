@@ -55,7 +55,8 @@ props:
 
 ```yaml
 data:
-  owner: player.name
+  owner:
+    $js: 'player.getName()'
   kills: 0
   level: 1
 ```

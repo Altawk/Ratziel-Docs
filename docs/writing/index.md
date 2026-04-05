@@ -29,6 +29,7 @@ sidebar_position: 1
 
 ## 当前已开始重写
 
+- [安装与部署（重写版）](./installation.md)
 - [快速开始（重写版）](./quickstart.md)
 - [配置与工作空间（重写版）](./configuration.md)
 - [物品系统（重写版）](./item.md)
@@ -39,6 +40,7 @@ sidebar_position: 1
 - [动态物品（重写版）](./dynamic-items.md)
 - [命令与重载（重写版）](./command.md)
 - [使用案例（重写版）](./examples.md)
+- [脚本与内联脚本（重写版）](./script.md)
 
 ## 命名规则说明
 

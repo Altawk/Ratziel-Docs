@@ -155,7 +155,7 @@ name: '<aqua>击杀之剑 <gray>[{dynamic:data:kills}]'
 你也可以直接在标签里运行脚本：
 
 ```yaml
-{script:player.name}
+{script:player.getName()}
 {script:jexl:player.health > 10 ? "安全" : "危险"}
 ```
 
@@ -168,7 +168,7 @@ name: '<aqua>击杀之剑 <gray>[{dynamic:data:kills}]'
 除了 `{script:...}`，字符串里还支持另一种常用写法：
 
 ```yaml
-name: '<yellow>{{player.name}} 的武器'
+name: '<yellow>{{player.getName()}} 的武器'
 ```
 
 它会直接在字符串内部运行脚本。
@@ -195,7 +195,8 @@ CounterSword:
       - '&7主人：{data:owner:未绑定}'
     data:
       kills: 0
-      owner: player.name
+      owner:
+        $js: 'player.getName()'
 ```
 
 ## 示例 2：显示计算结果
@@ -209,7 +210,8 @@ RankSword:
     data:
       kills: 0
     define:
-      rank: 'kills >= 100 ? "传说" : "普通"'
+      rank:
+        $js: 'kills >= 100 ? "传说" : "普通"'
 ```
 
 ## 示例 3：使用动态标签
@@ -229,7 +231,7 @@ DynamicSword:
 ScriptNameItem:
   item:
     material: PAPER
-    name: '<green>{{player.name}} 的纸张'
+    name: '<green>{{player.getName()}} 的纸张'
 ```
 
 ## 什么时候用哪种标签
@@ -290,3 +292,4 @@ ScriptNameItem:
 
 - 回到 [物品动作（重写版）](./item-action.md)，让标签和动作配合使用
 - 回到 [物品数据（重写版）](./item-data.md)，把物品状态设计完整
+- 阅读 [脚本与内联脚本（重写版）](./script.md)，把标签和脚本配合使用

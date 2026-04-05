@@ -181,8 +181,10 @@ plugins/Ratziel/workspace/
 
 如果你已经知道配置文件和工作空间分别负责什么，建议继续阅读：
 
+- [安装与部署（重写版）](./installation.md)
 - [快速开始（重写版）](./quickstart.md)
 - [物品系统（重写版）](./item.md)
 - [物品动作（重写版）](./item-action.md)
 - [物品数据（重写版）](./item-data.md)
 - [物品标签（重写版）](./item-tag.md)
+- [脚本与内联脚本（重写版）](./script.md)
