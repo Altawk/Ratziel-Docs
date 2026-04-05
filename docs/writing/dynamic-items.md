@@ -1,380 +1,266 @@
 ---
-title: 动态物品系统
-sidebar_position: 12
+title: 动态物品（重写版）
+sidebar_position: 9
 ---
 
-# 动态物品系统
+# 动态物品
 
-动态物品（也称为虚拟物品）是 Ratziel 的核心特性之一，它允许物品的显示内容根据实时数据动态变化，为玩家提供实时更新的物品信息，而无需重新生成物品。
+动态物品的核心意义，不是“让物品自己变强”，而是：
 
-## 核心概念
+**让玩家看到的名称和描述，可以随着上下文实时变化。**
 
-### 动态标签
-动态标签使用 `{dynamic:解析器:参数}` 语法，在物品显示时实时解析，内容可以根据当前状态动态变化。
+最常见的动态内容包括：
 
-### 虚拟渲染
-系统通过虚拟渲染技术，在客户端显示动态内容，而服务端保持原始物品数据不变，确保数据一致性。
+- 当前击杀数
+- 当前持有者名字
+- 当前玩家的 PlaceholderAPI 变量
+- 由数据和计算层推导出的结果
 
-### 实时同步
-当动态内容发生变化时，系统自动同步到客户端，玩家可以看到实时更新的物品信息。
+## 普通标签 vs 动态标签
 
----
+最容易理解动态物品的方式，就是先区分这两类写法。
 
-## 基础用法
-
-### 动态标签语法
+### 普通标签
 
 ```yaml
-# 基础语法
-name: "物品名称 {dynamic:解析器名称:参数}"
-
-# 常用动态标签
-DynamicItem:
-  item:
-    material: COMPASS
-    name: "<blue>动态指南针"
-    lore:
-      - "当前血量: {dynamic:data:health}"
-      - "当前位置: {dynamic:script:player.getLocation().toString()}"
-      - "在线时间: {dynamic:computation:online_time}"
-      - "随机数: {dynamic:script:Math.floor(Math.random() * 100)}"
+lore:
+  - '&7击杀数：{data:kills:0}'
 ```
 
-### 数据驱动的动态显示
+这种写法更适合：
+
+- 生成时就能确定的内容
+- 不需要后续持续变化的内容
+
+### 动态标签
 
 ```yaml
+lore:
+  - '&7击杀数：{dynamic:data:kills}'
+```
+
+这种写法更适合：
+
+- 之后还会变化的内容
+- 需要在展示时重新解析的内容
+
+你可以先简单记住：
+
+> **想让玩家之后看到变化，就优先考虑 `dynamic`。**
+
+## 动态标签的基本格式
+
+```text
+{dynamic:解析器:参数1:参数2}
+```
+
+例如：
+
+- `{dynamic:data:kills}`
+- `{dynamic:define:rank}`
+- `{dynamic:papi:player_name}`
+
+## 最小示例
+
+```yaml title="plugins/Ratziel/workspace/dynamic.yml"
 KillCounter:
   item:
     material: DIAMOND_SWORD
-    name: "<blue>击杀计数器 <yellow>[{dynamic:data:kill_count}]"
+    name: '<aqua>击杀之剑 <gray>[{dynamic:data:kills}]'
     lore:
-      - "<gray>━━━━━━━━━━━━━━━━━━━━"
-      - "<red>💀 击杀数: <white>{dynamic:data:kill_count}"
-      - "<yellow>⭐ 等级: <white>{dynamic:data:level}"
-      - "<blue>📊 经验: <white>{dynamic:data:experience}/{dynamic:data:max_experience}"
-      - "<gray>━━━━━━━━━━━━━━━━━━━━"
-    
+      - '&7当前击杀数：{dynamic:data:kills}'
     data:
-      kill_count: 0
-      level: 1
-      experience: 0
-      max_experience: 100
-    
+      kills: 0
     action:
-      onKill: |-
-        // 更新击杀数
-        kills = item.get("kill_count") || 0
-        item.set("kill_count", kills + 1)
-        
-        // 更新经验
-        exp = item.get("experience") || 0
-        newExp = exp + 10
-        
-        if (newExp >= item.get("max_experience")) {
-          // 升级逻辑
-          level = item.get("level") || 1
-          item.set("level", level + 1)
-          item.set("experience", 0)
-          item.set("max_experience", (level + 1) * 100)
-        } else {
-          item.set("experience", newExp)
-        }
+      onKill:
+        - 'kills = item.get("kills") || 0'
+        - 'item.set("kills", kills + 1)'
 ```
 
----
+这个例子里：
 
-## 支持的动态解析器
+- `kills` 存在数据层里
+- `onKill` 会更新这个值
+- 名称和 lore 用动态标签读取它
 
-### data 解析器
+因此玩家看到的显示内容可以随着击杀数变化。
 
-访问物品的数据层内容，支持实时数据变化。
+## 常见动态标签类型
+
+## 1. 动态数据标签
+
+最常用，也最推荐先掌握。
 
 ```yaml
-PlayerStats:
+{dynamic:data:kills}
+{dynamic:data:owner}
+{dynamic:data:level}
+```
+
+适合：
+
+- 等级
+- 击杀数
+- 绑定主人
+- 冷却计数
+- 任务进度
+
+## 2. 动态计算标签
+
+用于读取计算层结果。
+
+```yaml
+{dynamic:compute:rank}
+{dynamic:computed:rank}
+{dynamic:define:rank}
+```
+
+适合：
+
+- 称号
+- 品质文本
+- 评分
+- 派生显示结果
+
+## 3. 动态常量标签
+
+虽然常量层本身不常变化，但它也可以参与动态解析。
+
+```yaml
+{dynamic:props:base_damage}
+{dynamic:properties:type}
+```
+
+常见场景较少，但在统一写法时仍然有用。
+
+## 4. 动态 PAPI 标签
+
+如果你想让物品展示跟玩家自身状态有关，PAPI 是很典型的场景。
+
+```yaml
+{dynamic:papi:player_name}
+{dynamic:papi:player_level}
+```
+
+例如：
+
+```yaml
+name: '<gold>{dynamic:papi:player_name} 的武器'
+```
+
+这种写法适合：
+
+- 当前玩家名
+- 等级
+- 经济余额
+- 其他 PlaceholderAPI 变量
+
+## 5. 动态模板引用
+
+模板里的内容也可以动态读取：
+
+```yaml
+{dynamic:inherit:BaseWeapon:name}
+```
+
+不过从使用体验来说，这一类通常没有 `data` / `define` / `papi` 常用。
+
+## 6. 动态脚本标签
+
+你也可以直接把脚本结果做成动态标签：
+
+```yaml
+{dynamic:script:player.getName()}
+```
+
+但这类写法更适合非常短、非常明确的逻辑。
+
+如果脚本越来越长，建议拆回数据层或计算层，不要全部塞进动态标签里。
+
+## 一个更实用的例子
+
+```yaml title="plugins/Ratziel/workspace/dynamic-player-item.yml"
+OwnerSword:
   item:
-    material: PLAYER_HEAD
-    name: "<green>玩家状态面板"
+    material: DIAMOND_SWORD
+    name: '<gold>拥有者之剑 <gray>[{dynamic:data:owner}]'
     lore:
-      - "血量: {dynamic:data:health}/{dynamic:data:max_health}"
-      - "法力: {dynamic:data:mana}/{dynamic:data:max_mana}"
-      - "等级: {dynamic:data:level}"
-      - "经验: {dynamic:data:exp}/{dynamic:data:max_exp}"
-    
+      - '&7当前主人：{dynamic:data:owner}'
+      - '&7当前评级：{dynamic:define:rank}'
+      - '&7当前玩家：{dynamic:papi:player_name}'
     data:
-      health: 20
-      max_health: 20
-      mana: 100
-      max_mana: 100
-      level: 1
-      exp: 0
-      max_exp: 100
-```
-
-### computation 解析器
-
-执行计算脚本，支持复杂的动态计算。
-
-```yaml
-SmartWeapon:
-  item:
-    material: NETHERITE_SWORD
-    name: "<red>智能武器 <gray>[攻击力: {dynamic:computation:attack_power}]"
-    lore:
-      - "基础攻击: {dynamic:computation:base_attack}"
-      - "等级加成: {dynamic:computation:level_bonus}"
-      - "总攻击力: {dynamic:computation:attack_power}"
-      - "暴击率: {dynamic:computation:crit_chance}%"
-    
-    data:
-      level: 1
-      base_attack: 10
-      crit_chance: 5
-    
-    computation:
-      base_attack: |-
-        return item.get("base_attack") || 10
-      
-      level_bonus: |-
-        level = item.get("level") || 1
-        return level * 2
-      
-      attack_power: |-
-        base = item.get("base_attack") || 10
-        level = item.get("level") || 1
-        return base + (level * 2)
-      
-      crit_chance: |-
-        base = item.get("crit_chance") || 5
-        level = item.get("level") || 1
-        return Math.min(base + level, 50)
-```
-
-### script 解析器
-
-直接执行脚本代码，获取实时信息。
-
-```yaml
-LiveInfo:
-  item:
-    material: CLOCK
-    name: "<yellow>实时信息面板"
-    lore:
-      - "当前时间: {dynamic:script:new Date().toLocaleString()}"
-      - "服务器TPS: {dynamic:script:Bukkit.getTPS()[0].toFixed(2)}"
-      - "在线玩家: {dynamic:script:Bukkit.getOnlinePlayers().size()}"
-      - "当前世界: {dynamic:script:player.getWorld().getName()}"
-      - "坐标: {dynamic:script:Math.floor(player.getLocation().getX()) + ',' + Math.floor(player.getLocation().getY()) + ',' + Math.floor(player.getLocation().getZ())}"
-```
-
----
-
-## 高级应用
-
-### 状态监控物品
-
-```yaml
-StatusMonitor:
-  item:
-    material: REDSTONE
-    name: "<rainbow>状态监控器</rainbow>"
-    lore:
-      - "<gray>━━━━━━━━━━━━━━━━━━━━"
-      - "<red>❤ 血量: <white>{dynamic:script:player.getHealth().toFixed(1)}/{dynamic:script:player.getMaxHealth()}"
-      - "<blue>🍖 饥饿: <white>{dynamic:script:player.getFoodLevel()}/20"
-      - "<yellow>⚡ 经验: <white>{dynamic:script:player.getLevel()}"
-      - "<green>💰 金钱: <white>{dynamic:script:economy ? economy.getBalance(player).toFixed(2) : 'N/A'}"
-      - "<purple>🌍 世界: <white>{dynamic:script:player.getWorld().getName()}"
-      - "<aqua>📍 位置: <white>{dynamic:script:Math.floor(player.getLocation().getX()) + ',' + Math.floor(player.getLocation().getZ())}"
-      - "<gray>━━━━━━━━━━━━━━━━━━━━"
-    
+      owner:
+        $js: 'player.getName()'
+      kills: 0
+    define:
+      rank:
+        $js: 'kills >= 50 ? "精英" : "普通"'
     action:
-      onTick:
-        period: 20  # 每秒更新一次
-        run: 'item.updateDisplay()'  # 触发显示更新
+      onKill:
+        - 'kills = item.get("kills") || 0'
+        - 'item.set("kills", kills + 1)'
 ```
 
-### 进度追踪物品
+这类配置已经足够覆盖很多“成长武器 / 绑定武器 / 玩家专属显示”玩法。
 
-```yaml
-QuestTracker:
-  item:
-    material: BOOK
-    name: "<gold>任务追踪器"
-    lore:
-      - "<yellow>当前任务: {dynamic:data:current_quest}"
-      - "<green>进度: {dynamic:data:progress}/{dynamic:data:max_progress}"
-      - "<blue>完成度: {dynamic:computation:completion_percentage}%"
-      - ""
-      - "<gray>任务描述:"
-      - "<white>{dynamic:data:quest_description}"
-    
-    data:
-      current_quest: "收集木材"
-      progress: 5
-      max_progress: 20
-      quest_description: "收集 20 个木材来建造房屋"
-    
-    computation:
-      completion_percentage: |-
-        progress = item.get("progress") || 0
-        maxProgress = item.get("max_progress") || 1
-        return Math.floor((progress / maxProgress) * 100)
-    
-    action:
-      onTick:
-        period: 100  # 每5秒检查一次
-        run: |-
-          // 检查任务进度并更新
-          // 这里可以添加任务检查逻辑
-```
+## 动态物品是怎么生效的
 
-### 装备属性面板
+从使用者角度，你只需要记住两点：
 
-```yaml
-EquipmentPanel:
-  item:
-    material: DIAMOND_CHESTPLATE
-    name: "<blue>装备属性面板"
-    lore:
-      - "<gray>━━━━━━━━━━━━━━━━━━━━"
-      - "<red>⚔ 攻击力: <white>{dynamic:computation:total_attack}"
-      - "<blue>🛡 防御力: <white>{dynamic:computation:total_defense}"
-      - "<yellow>⚡ 速度: <white>{dynamic:computation:total_speed}"
-      - "<green>❤ 生命值: <white>{dynamic:computation:total_health}"
-      - "<purple>✨ 魔法力: <white>{dynamic:computation:total_mana}"
-      - "<gray>━━━━━━━━━━━━━━━━━━━━"
-      - "<aqua>套装效果: {dynamic:computation:set_bonus}"
-    
-    computation:
-      total_attack: |-
-        // 计算所有装备的攻击力总和
-        total = 0
-        inventory = player.getInventory()
-        
-        // 检查主手武器
-        mainHand = inventory.getItemInMainHand()
-        if (mainHand && mainHand.hasItemMeta()) {
-          // 这里添加获取武器攻击力的逻辑
-        }
-        
-        return total
-      
-      total_defense: |-
-        // 计算所有护甲的防御力总和
-        return calculateArmorDefense(player)
-      
-      set_bonus: |-
-        // 检查套装效果
-        return checkSetBonus(player)
-```
+1. **动态标签不会像普通标签那样只处理一次**
+2. **它会在展示阶段继续被处理**
 
----
+所以动态物品更适合“显示会变化”的场景，而不是所有地方都默认加上 `dynamic`。
 
-## 性能优化
+## 什么时候应该用动态标签
 
-### 智能更新机制
+适合用动态标签：
 
-系统只在必要时更新动态内容，避免不必要的计算：
+- 玩家会在持有过程中看到数值变化
+- 你想让 lore/name 跟随数据层变化
+- 你想展示 PlaceholderAPI 实时信息
+- 你不想每次变化都重新生成整件物品
 
-```yaml
-OptimizedItem:
-  item:
-    material: EMERALD
-    name: "<green>优化物品"
-    lore:
-      - "血量: {dynamic:data:cached_health}"  # 使用缓存数据
-      - "更新时间: {dynamic:data:last_update}"
-    
-    action:
-      onTick:
-        period: 100  # 每5秒更新一次，而不是每tick
-        run: |-
-          // 只在数据真正变化时更新
-          currentHealth = player.getHealth()
-          lastHealth = item.get("cached_health") || 0
-          
-          if (Math.abs(currentHealth - lastHealth) > 0.5) {
-            item.set("cached_health", currentHealth)
-            item.set("last_update", new Date().toLocaleString())
-          }
-```
+不一定需要动态标签：
 
-### 条件性动态标签
+- 内容在生成时就完全固定
+- 只是一次性记录主人名字
+- 只是生成时写入一段不会再变化的文本
 
-```yaml
-ConditionalDynamic:
-  item:
-    material: COMPASS
-    name: "<yellow>条件动态物品"
-    lore:
-      - condition: "{dynamic:script:player.getHealth() < 10}"
-        content: "<red>⚠ 血量危险！"
-      - condition: "{dynamic:script:player.getLevel() >= 10}"
-        content: "<gold>⭐ 高等级玩家"
-      - "普通信息显示"
-```
+## 一个很重要的判断方法
 
----
+### 用普通标签
+如果你想表达：
 
-## 技术原理
+> “生成这件物品时，把值写进去。”
 
-### 虚拟渲染流程
+那就先试普通标签。
 
-1. **标记识别**：系统识别配置中的动态标签
-2. **虚拟渲染**：在发送到客户端前，实时解析动态内容
-3. **差异记录**：记录虚拟物品与原始物品的差异
-4. **客户端同步**：将渲染后的物品发送给客户端
-5. **恢复机制**：在服务端操作时恢复原始物品数据
+### 用动态标签
+如果你想表达：
 
-### 数据一致性
+> “玩家之后看到时，这个值可能已经变了。”
 
-- **服务端存储**：原始物品数据始终保存在服务端
-- **客户端显示**：动态渲染的内容仅用于客户端显示
-- **操作恢复**：所有服务端操作都基于原始数据
+那就优先试动态标签。
 
----
+## 新手建议
 
-## 最佳实践
+### 建议一：先只给 `name` 和 `lore` 用动态标签
+这是最直观、最容易验证的用法。
 
-1. **合理使用频率**：避免过于频繁的动态更新
-2. **缓存计算结果**：对复杂计算进行缓存
-3. **条件性更新**：只在数据真正变化时更新
-4. **简化脚本逻辑**：保持动态脚本简单高效
-5. **测试性能影响**：监控动态物品对服务器性能的影响
+### 建议二：优先从 `dynamic:data` 开始
+这是最稳、最容易理解的一类动态标签。
 
----
+### 建议三：复杂逻辑放回 `define`
+不要把所有判断都直接塞进 `dynamic:script:...`。
 
-## API 参考
+### 建议四：不要一上来所有标签都改成动态
+只给真正会变化的内容加 `dynamic`，更容易维护。
 
-### 动态标签注册
+## 下一步
 
-```kotlin
-// 注册动态标签解析器
-ItemRegistry.registerDynamicTagResolver(object : ItemTagResolver {
-    override val alias = arrayOf("custom")
-    
-    override fun resolve(args: List<String>, context: ArgumentContext): String? {
-        // 自定义动态解析逻辑
-        return "动态内容"
-    }
-})
-```
+如果你已经理解动态物品，接下来最适合配合阅读的是：
 
-### 虚拟渲染器
-
-```kotlin
-// 自定义虚拟渲染器
-object CustomVirtualRenderer : VirtualItemRenderer.Acceptor {
-    override fun wouldChange(context: ArgumentContext): Boolean {
-        // 判断是否需要渲染
-        return true
-    }
-    
-    override fun accept(actual: NeoItem, context: ArgumentContext) {
-        // 自定义渲染逻辑
-    }
-}
-
-// 注册渲染器
-NativeVirtualItemRenderer.acceptors.add(CustomVirtualRenderer)
-```
+- [物品数据（重写版）](./item-data.md)
+- [物品标签（重写版）](./item-tag.md)
+- [模板继承（重写版）](./template.md)
