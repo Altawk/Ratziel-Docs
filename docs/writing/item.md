@@ -135,7 +135,7 @@ FireSword:
 2. [物品数据（重写版）](./item-data.md)
 3. [物品标签（重写版）](./item-tag.md)
 4. [模板继承（重写版）](./template.md)
-5. 动态物品（待重写）
+5. [动态物品（重写版）](./dynamic-items.md)
 
 ## 下一步
 
@@ -145,3 +145,6 @@ FireSword:
 - [物品数据（重写版）](./item-data.md)
 - [物品标签（重写版）](./item-tag.md)
 - [模板继承（重写版）](./template.md)
+- [动态物品（重写版）](./dynamic-items.md)
+- [命令与重载（重写版）](./command.md)
+- [使用案例（重写版）](./examples.md)
